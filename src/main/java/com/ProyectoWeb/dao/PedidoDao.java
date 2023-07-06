@@ -4,10 +4,10 @@
  */
 package com.ProyectoWeb.dao;
 
-/**
- *
- * @author jp09f
- */
-public class dao {
-    
+import com.ProyectoWeb.domain.Pedido;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+
+public interface PedidoDao extends JpaRepository<Pedido, Long>{
+    // mas adelante vamos a crear metodos ampliados
 }

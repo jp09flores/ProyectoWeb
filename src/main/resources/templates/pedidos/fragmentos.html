@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>TechShop</title>
+    </head>
+    <body>
+        <section th:fragment="listadoAcciones">
+            <div class="mt-5 row">
+                <center>
+                    <form th:action="@{/pedidos/guardar}" th:object="${pedido}"
+                          method="POST" class="was-validated" enctype="multipart/form-data">
+                        <div class="modal-body">
+                            <div class="mb-3">
+
+                                <input type="hidden" class="form-control" id="fechaEmision" name="fechaEmision" required="true"/>
+                                <script>
+                                    var fechaInput = document.getElementById("fechaEmision");
+                                    var fechaActual = new Date();
+                                    var fechaFormateada = fechaActual.toISOString().split('T')[0];
+                                    fechaInput.value = fechaFormateada;
+                                </script>
+                                <input type="hidden" name="total" value="0"/>
+                                <input type="hidden" name="estado" value="1"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8 d-grid">
+                            <button style="height: 80px" class="btn btn-success my-4" type="submit"><span style="font-size: 40px">Agregar</span></button>
+                        </div>
+                    </form>
+
+                    <div class="col-md-8 d-grid">
+                        <button style="height: 80px" class="btn btn-success my-4">
+                            <a class="nav-link" th:href="@{/pedidos/agregar}" style="height:"><span style="font-size: 40px">Editar</span> </a>
+                        </button>
+                        <button style="height: 80px" class="btn btn-success my-4">
+                            <a class="nav-link" th:href="@{/pedidos/agregar}" style="height:"><span style="font-size: 40px">Eliminar</span> </a>
+                        </button>  
+                    </div>
+                </center>
+            </div>
+        </section>
+
+        <section th:fragment="listadoProductos" id="productos">
+            <div style="--bs-gutter-x: 0;"class="row">
+                <a name="arriba"></a>
+                <div style ="background-color: red"class="text-white col-md-2">
+                    <div class="row p-4">
+                        <ul class="list-unstyled" style="font-size: larger; margin-bottom: 10px;">
+                            <li class=" filtro nav-item">
+                                <a class="nav-link" 
+                                   aria-current="page" 
+                                   href="/pedidos/listado"
+                                   >ALL</a>
+                            </li>
+                            <li th:each="categoria : ${categorias}" class="filtro py-2">
+                                <a class=" nav-link" 
+                                   th:href="@{/pedidos/listado/}+${categoria.idCategoria}"
+                                   >[[${categoria.nombreCategoria}]]</a>
+                            </li>                    
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div style=" --bs-card-border-color: orange" class="card">
+
+                        <div th:if="${productos != null and !productos.empty}" style="background-color: orange;">
+
+                            <center>
+                                <div style="display: flex;justify-content: center; flex-wrap: wrap;">
+                                    <div th:each="producto, contador : ${productos}" class="card m-2" style="width: 18rem;">
+                                        <div style="position: relative; width: 100%; height: 0; padding-top: 56%;">
+                                            <img id="blah" class="card-img-top" th:src="@{${producto.rutaImagen}}" 
+                                                 alt="Card image cap" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">[[${producto.nombreProducto}]]</h5>
+                                            <p>[[${#numbers.formatDecimal(producto.precio, 1, 'DEFAULT', 2, 'DEFAULT')}]]</p> 
+                                            <a th:href="@{/producto/modificar/}+${producto.idProducto} "class="btn btn-primary">Agregar</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </center>
+                            <a style="display:flex"class="mr-4 justify-content-end" href="#arriba">Ir arriba</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

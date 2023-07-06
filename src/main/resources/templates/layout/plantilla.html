@@ -62,7 +62,24 @@
                 filter: blur(1.5px);
             }
             
+            .filtro{
+                font-size: 20px;
+            }
+            .filtro:hover {
+                font-size: 22px;
+                font-weight: bold;
+
+            }
+        
+
         </style>
+        <script>
+            function establecerFechaActual() {
+                var campoFecha = document.getElementById("fechaEmision");
+                var fechaActual = new Date();
+                campoFecha.value = fechaActual.toISOString().split("T")[0];
+            }
+        </script>
     </head>
     <body>
         <header th:fragment="header" class="header">
@@ -76,7 +93,7 @@
                            margin-right: 8%" th:href="@{/}" class="px-4 navbar-brand text-white "><strong>Donde John</strong></a>
                         <div  class="navbar-collapse justify-content-between " id="navbarCollapse ">
                             <ul class=" navbar-nav">
-                                <li class="nav-item px-2"><a class="nav-link" th:href="@{/pedidos/listado}"><span id="spamheader">Pedidos</span></a></li>
+                                <li class="nav-item px-2"><a class="nav-link" th:href="@{/pedidos/inicio}"><span id="spamheader">Pedidos</span></a></li>
                                 <li class="text-white nav-item px-2"><a class="nav-link" th:href="@{/menu/listado}"><span id="spamheader">Menu</span></a></li>
                                 <li class="text-white nav-item px-2"><a class="nav-link" th:href="@{/usuario/listado}"><span id="spamheader">Contactenos</span></a></li>
                                 <li class="text-white nav-item px-2"><a class="nav-link" th:href="@{/usuario/listado}"><span id="spamheader">Nosotros</span></a></li>
