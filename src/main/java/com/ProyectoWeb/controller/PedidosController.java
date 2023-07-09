@@ -2,11 +2,14 @@
 package com.ProyectoWeb.controller;
 
 import com.ProyectoWeb.domain.Categoria;
+import com.ProyectoWeb.domain.DetallePedido;
 import com.ProyectoWeb.domain.Pedido;
 import com.ProyectoWeb.domain.Producto;
 import com.ProyectoWeb.service.CategoriaService;
+import com.ProyectoWeb.service.DetallePedidoService;
 import com.ProyectoWeb.service.PedidoService;
 import com.ProyectoWeb.service.ProductoService;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +29,10 @@ public class PedidosController {
      @Autowired
     private PedidoService pedidoService;
     
+     @Autowired
+    private DetallePedidoService detallePedidoService;
+     
+     
     @RequestMapping("/inicio")
     public String page(Model model) {
         return "/pedidos/inicio";
@@ -59,6 +66,7 @@ public class PedidosController {
         model.addAttribute("categorias", categorias);
         return "/pedidos/listado";
     }
+    
     
    
 }

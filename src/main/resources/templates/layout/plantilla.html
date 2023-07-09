@@ -9,6 +9,7 @@
         <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
         <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
         <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+        <script src="../../static/js/rutina.js" type="text/javascript"></script>
         <style>
             #spamheader{
                 color: white;
@@ -61,7 +62,7 @@
             #blurImagen{
                 filter: blur(1.5px);
             }
-            
+
             .filtro{
                 font-size: 20px;
             }
@@ -70,7 +71,7 @@
                 font-weight: bold;
 
             }
-        
+
 
         </style>
         <script>
@@ -79,6 +80,10 @@
                 var fechaActual = new Date();
                 campoFecha.value = fechaActual.toISOString().split("T")[0];
             }
+
+           
+            
+            
         </script>
     </head>
     <body>

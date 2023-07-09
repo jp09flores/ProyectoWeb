@@ -9,7 +9,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import java.io.Serializable;
 import lombok.Data;
 
 /**
@@ -19,7 +22,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "detalle_pedido")
-public class DetallePedido {
+public class DetallePedido implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -27,11 +30,33 @@ public class DetallePedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cont")
     private Long cont;
-    private int id_pedido;
-    private int num_linea;
-    private int id_producto;
-    private int cantidad_producto;
-    private int comentarios;
-    private int detalle_subtotal;
+    private int cantidadProducto;
+    private String comentarios;
+    private int detalleSubtotal;
+    private boolean estado;
+
+    @ManyToOne
+    @JoinColumn(name = "id_producto")
+    private Producto producto;
+
+    @ManyToOne
+    @JoinColumn(name = "id_pedido")
+    private Pedido pedido;
+
+    public DetallePedido() {
+    }
+
+    public DetallePedido(int cantidadProducto, String comentarios, int detalleSubtotal, boolean estado) {
+        this.cantidadProducto = cantidadProducto;
+        this.comentarios = comentarios;
+        this.detalleSubtotal = detalleSubtotal;
+        this.estado = estado;
+    }
+
+    
+
+   
+
+   
 
 }

@@ -21,6 +21,11 @@ public class Pedido implements Serializable {
     private String fechaEmision;
     private double total;
     private boolean estado;
+    
+    
+    @OneToMany
+    @JoinColumn(name = "id_pedido")
+    private List<DetallePedido> detallePedido;
 
     public Pedido() {
     }
