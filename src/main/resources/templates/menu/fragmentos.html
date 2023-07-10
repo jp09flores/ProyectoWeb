@@ -4,7 +4,7 @@
     <head th:replace="~{layout/plantilla :: head}">
     </head>
     <body>
-
+       
         <section th:fragment="categoriasTabs" id="categorias">
             <div class="row p-4">
                 <ul class="">
@@ -23,27 +23,28 @@
             </div>
         </section>
 
-         <section th:fragment="listadoMenu" id="produtosMenu">
+        <section th:fragment="listadoMenu" id="produtosMenu">
+             <a name="arriba"></a>
             <div style="--bs-gutter-x: 0;"class="row">
-                <a name="arriba"></a>
+
                 <div class="text-white col-md-2 ">
                     <h3 style="margin: 10px 0px 0px 10px">Categorias</h3>
                     <hr style="border: none; border-top: 3.5px solid #ffffff; margin-left : 5px ;opacity: 0.8">
-                    <div class=" p-4">
-                        <ul class="list-unstyled" style="font-size: larger; margin-bottom: 10px;">
-                            <li class=" filtro nav-item">
-                                <a class="nav-link" 
-                                   aria-current="page" 
-                                   href="/menu/listado"
-                                   >ALL</a>
-                            </li>
-                            <li th:each="categoria : ${categorias}" class="filtro py-2">
-                                <a style="font-weight: bold;" class=" nav-link" 
-                                   th:href="@{/menu/listado/}+${categoria.idCategoria}"
-                                   >[[${categoria.nombreCategoria}]]</a>
-                            </li>                    
-                        </ul>
-                    </div>
+                        <div class=" p-4">
+                            <ul class="list-unstyled" style="font-size: larger; margin-bottom: 10px;">
+                                <li class=" filtro nav-item">
+                                    <a class="nav-link" 
+                                       aria-current="page" 
+                                       href="/menu/listado"
+                                       >ALL</a>
+                                </li>
+                                <li th:each="categoria : ${categorias}" class="filtro py-2">
+                                    <a class=" nav-link" 
+                                       th:href="@{/menu/listado/}+${categoria.idCategoria}"
+                                       >[[${categoria.nombreCategoria}]]</a>
+                                </li>                    
+                            </ul>
+                        </div>
                 </div>
                 <div class="col-md-10">
                     <div style=" --bs-card-border-color: orange" class="card">
@@ -70,9 +71,18 @@
                     </div>
                 </div>
             </div>
+            <footer style="width: 100%;background-color: #f35c2c" class=" text-white mt-5 p-2">
+                <div  class="container">
+                    <div class="col">
+                        <p class=" m-0 lead text-center">
+                            &COPY; Derechos Reservados 2023
+                        </p>
+                    </div>
+                </div>
+            </footer>
         </section>
 
 
-        
+
     </body>
 </html>
