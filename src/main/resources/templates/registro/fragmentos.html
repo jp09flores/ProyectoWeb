@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}">
+        <body>
+            <section style="margin-top: 45px" th:fragment="Formulario">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img style="margin-top: 60px; position: absolute;left: 101px;" src="images/2-removebg-preview.png" width="450" height="450"/>
+                        </div>
+                        <div class="col-md-8 col-md-offset-3">                            
+                            <h1>Regístrate</h1>
+                            <form th:action="@{/registro}" method="POST" th:object="${usuario}">
+                                <div class="form-group">
+                                    <label class="control-label" for="nombreUsuario">Nombre : </label> <input
+                                        style="margin-bottom: 16px;" id="nombreUsuario" type="text" class="form-control" th:field="*{nombreUsuario}"
+                                        required autofocus="autofocus">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label" for="primer_apellido">Primer Apellido : </label> <input
+                                        style="margin-bottom: 16px;" id="primer_apellido" class="form-control" th:field="*{primer_apellido}"
+                                        required autofocus="autofocus">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label" for="segundo_apellido">Segundo Apellido : </label> <input
+                                        style="margin-bottom: 16px;" id="segundo_apellido" class="form-control" th:field="*{segundo_apellido}"
+                                        required autofocus="autofocus">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label" for="email">Email : </label> <input
+                                        style="margin-bottom: 16px;" id="email" type="email" class="form-control" th:field="*{email}"
+                                        required autofocus="autofocus">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label" for="pass">Password : </label> <input
+                                        style="margin-bottom: 25px;" type="password" id="pass" class="form-control" th:field="*{pass}"
+                                        required autofocus="autofocus">
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success" fdprocessedid="mzgvk9" style="
+                                            position: absolute;
+                                            left: 646px;
+                                            right: 205px;
+                                            padding-top: 15px;
+                                            padding-bottom: 15px;
+                                            ">Registrar
+                                    </button>
+                                </div>
+                                <div th:if=${param.exito}>
+                                <div class="alert alert-success">Se ha registrado exitosamente!!!!</div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <footer th:fragment="footer"style="  height: 8%;position: fixed;bottom: 0;left: 0;width: 100%;background-color: #f35c2c" class=" text-white mt-5 p-2">
+                <div  class="container">
+                    <div class="col">
+                        <p class=" m-0 lead text-center">
+                            &COPY; Derechos Reservados 2023
+                        </p>
+                    </div>
+                </div>
+            </footer>
+        </body>
+</html>
