@@ -43,7 +43,7 @@ public class DetallePedidoController {
     }
      
     
-    @GetMapping("/listado")                             //Solo mediante peticiones GET
+    @GetMapping("/listado")                            
     public String page(Model model) {
         List<DetallePedido> detallePedidos = detallePedidoService.getDetallePedidos(true);
         List<Producto> productos = productoService.getProductos(true);
@@ -54,5 +54,9 @@ public class DetallePedidoController {
         return "/detallePedido/listado";
     }
     
-    
+    @GetMapping("/eliminar/{cont}")
+    public String detallePedidoEliminar(DetallePedido detallePedido) {
+        detallePedidoService.delete(detallePedido);
+        return "redirect:/detallePedido/listado";
+    }
 }

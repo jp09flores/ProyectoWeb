@@ -12,7 +12,6 @@
                           th:action="@{/detallePedido/agregar/guardar}" th:object="${detalleProducto}"
                           class="was-validated"
                           enctype="multipart/form-data">
-
                         <input type="hidden" name="pedido.idPedido" value="1"/>
                         <input type="hidden" name="producto.idProducto" th:value="${producto.idProducto}"/>
                         <input type="hidden" name="estado" value="1"/>
@@ -78,21 +77,24 @@
 
         <section th:fragment="listadoProductos" id="productos">
             <div class="container">
+                <a th:href="@{/pedidos/listado}" class="mt-5 btn btn-primary">
+                            <i class="fas fa-arrow-left"></i> REGRESAR
+                        </a>
                 <div class="row">
                     <div class="col-md-10">
                         <div class="mt-5 card">
                             <div class="card-header">
-                                <h4>Listado</h4></div>
+                                <h4>Pedido</h4></div>
                             <div th:if="${detallePedidos != null and !detallePedidos.empty}" >
                                 <table class="table table-striped table-hover fs-6">
-                                    <thead class="table-dark">
+                                    <thead class="table">
                                         <tr>
                                             <th>#</th>
                                             <th class="text-center">idPedido</th>
                                             <th class="text-center">Producto</th>
                                             <th class="text-center">cantidad</th>
                                             <th class="text-center">comentarios</th>
-                                            <th></th><th></th></tr>
+                                            </tr>
                                     </thead>
                                     <tbody>
                                         <tr th:each="detallePedido, contador : ${detallePedidos}">
@@ -100,8 +102,11 @@
                                             <td class="text-center">[[${detallePedido.pedido.idPedido}]]</td>
                                             <td class="text-center">[[${detallePedido.producto.nombreProducto}]]</td>
                                             <td class="text-center">[[${detallePedido.cantidadProducto}]]</td>
-                                            <td class="text-center">[[${detallePedido.comentarios}]]</td>        
-                                            </tr>
+                                            <td class="text-center">[[${detallePedido.comentarios}]]</td> 
+                                            <td><a th:href="@{/detallePedido/eliminar/}+${detallePedido.cont}"
+                                                   class="btn btn-danger">
+                                                    <i class="fas fa-trash"></i> Eliminar</a></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -110,7 +115,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </section>

@@ -1,13 +1,4 @@
-var contador = 0;
 
-function incrementarContador() {
-    contador++;
-    document.getElementById("contador").innerHTML = contador;
-}
-
-function obtenerContador() {
-    return contador;
-}
 
 function readURL(input) {
     if (input.files && input.files[0]) {
