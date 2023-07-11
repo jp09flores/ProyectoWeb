@@ -67,6 +67,10 @@ public class PedidosController {
         return "/pedidos/listado";
     }
     
-    
+    @RequestMapping("/editar")
+    public String editarDetallePedido(Model model) {
+        return "/pedidos/editar";
+    }
+ 
    
 }
