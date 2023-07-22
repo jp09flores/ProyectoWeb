@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/plantilla :: head}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    
+</head>
+
+<body>
+    <header th:replace="~{layout/plantilla :: header}"></header>
+    <style>
+    /* Estilos para las tarjetas */
+    .card {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        background-color: #ECF0F1;
+        color: #333;
+        transition: box-shadow 0.3s ease, transform 0.5s ease; /* Agregamos transform a la transición */
+        transform-origin: right; /* Establecemos el punto de origen de la transformación en el lado izquierdo */
+    }
+
+    .card-title {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px;
+        border-radius: 20px 20px 20px 20px;
+     
+    }
+
+    .card:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        transform: scale(0.9); /* Escalamos el lado izquierdo en un 90% en el evento hover */
+    }
+
+    /* Estilos para el contenedor de estrellas */
+    .rating {
+        display: flex;
+        justify-content: center;
+    }
+
+    /* Estilo para ocultar los radio buttons */
+    .rating input[type="radio"] {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    /* Estilo para las estrellas vacías */
+    .rating label {
+        font-size: 25px;
+        color: #ccc;
+        cursor: pointer;
+        transition: color 0.2s;
+    }
+
+    /* Estilo para las estrellas llenas al pasar el cursor sobre ellas */
+    .rating label:hover,
+    .rating label:hover ~ label,
+    .rating input[type="radio"]:checked ~ label {
+        color: #ffc107;
+    }
+
+    /* Estilos para el formulario */
+    form {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    /* Estilos para el campo de comentario */
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    .form-group label {
+        display: block;
+    }
+
+    .form-group textarea {
+        width: 100%;
+        height: 100px;
+    }
+
+    /* Estilos para el botón de enviar */
+    .form-group button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    /* Estilos para el mensaje de éxito */
+    .success-message {
+        color: green;
+        font-weight: bold;
+    }
+    .thank-you-message {
+            display: none;
+            font-size: 30px;
+            font-weight: bold;
+            color: green;
+            margin-top: 20px;
+            animation: fadeOut 3s ease-in-out;
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* Estilos para el formulario */
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Estilos para el campo de comentario */
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .form-group label {
+            display: block;
+        }
+
+        .form-group textarea {
+            width: 100%;
+            height: 100px;
+        }
+
+        /* Estilos para el botón de enviar */
+        .form-group button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+</style>
+
+    <section>
+        <div class="col-md-10">
+            <div style="--bs-card-border-color: orange" class="card">
+                <div th:if="${comentarios != null and !comentarios.empty}" style="background-color: orange;">
+                    <center>
+                        <div style="display: flex; justify-content: center; flex-wrap: wrap; margin-left: 220px;">
+                            <div th:each="comentario, contador : ${comentarios}" class="card m-2" style="width: calc(33.33% - 20px); margin-right: 10px;">
+                                <div class="card-body">
+                                    <p><strong> ID ANONIMO:[[${comentario.idComentario}]]</strong></p>
+                                    <p><strong>[[${comentario.fechaEmision}]]</strong></p>
+                                    <h5 class="card-title">[[${comentario.Comentario}]]</h5>
+                                    <div class="rating">
+                                        <!-- Reemplaza el 5 con el valor de la valoración de cada comentario -->
+                                        <input type="radio" name="rating[[${contador.index}]]" id="star5[[${
+                                                   contador.index
+                                               }
+                                               ]]" value="5" checked="checked">
+                                        <label for="star5[[${contador.index}]]" class="fa fa-star"></label>
+
+                                        <input type="radio" name="rating[[${contador.index}]]" id="star4[[${
+                                                   contador.index
+                                               }
+                                               ]]" value="4">
+                                        <label for="star4[[${contador.index}]]" class="fa fa-star"></label>
+
+                                        <input type="radio" name="rating[[${contador.index}]]" id="star3[[${
+                                                   contador.index
+                                               }
+                                               ]]" value="3">
+                                        <label for="star3[[${contador.index}]]" class="fa fa-star"></label>
+
+                                        <input type="radio" name="rating[[${contador.index}]]" id="star2[[${
+                                                   contador.index
+                                               }
+                                               ]]" value="2">
+                                        <label for="star2[[${contador.index}]]" class="fa fa-star"></label>
+
+                                        <input type="radio" name="rating[[${contador.index}]]" id="star1[[${
+                                                   contador.index
+                                               }
+                                               ]]" value="1">
+                                        <label for="star1[[${contador.index}]]" class="fa fa-star"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </center>
+                </div>
+            </div>
+        </div>
+
+<center>
+    <form action="guardar_comentario.php" method="POST">
+        <div class="form-group">
+            <label for="comentario"><strong>Comentario:</strong></label>
+            <textarea id="comentario" name="comentario" required placeholder="AGREGA UN COMENTARIO PARA MEJORAR NUESTRO SERVICIO"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label><STRONG>Valoración:</STRONG></label>
+            <div class="rating">
+                <input type="radio" name="valoracion" id="star5" value="5">
+                <label for="star5" class="fa fa-star"></label>
+
+                <input type="radio" name="valoracion" id="star4" value="4">
+                <label for="star4" class="fa fa-star"></label>
+
+                <input type="radio" name="valoracion" id="star3" value="3">
+                <label for="star3" class="fa fa-star"></label>
+
+                <input type="radio" name="valoracion" id="star2" value="2">
+                <label for="star2" class="fa fa-star"></label>
+
+                <input type="radio" name="valoracion" id="star1" value="1">
+                <label for="star1" class="fa fa-star"></label>
+            </div>
+        </div>
+         <button type="submit" onclick="showThankYouMessage()">Enviar comentario</button>
+
+
+         <!-- Mensaje de agradecimiento oculto -->
+         <div class="thank-you-message" id="thankYouMessage">GRACIAS POR EL COMENTARIO</div>
+
+    </form>
+</center>
+
+
+        <footer style="width: 100%;background-color: #f35c2c" class=" text-white mt-5 p-2">
+            <div class="container">
+                <div class="col">
+                    <p class="m-0 lead text-center">
+                        &COPY; Derechos Reservados 2023
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </section>
+</body>
+</html>
