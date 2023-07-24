@@ -125,17 +125,17 @@
         </header>
 
         <section th:fragment="botonInicioSesion" sec:authorize="!isAuthenticated()">
-            <a th:href="@{/login}" class="btn btn-light" style="padding-right: 20px; text-align: center; display: flex; align-items: center; right: 26px; left: 90%; top: 85%; position: fixed;">
+            <a th:href="@{/login}" class="btn btn-light" style="padding-right: 20px; text-align: center; display: flex; align-items: center; right: 26px; left: 90%; top: 88%; position: fixed;">
                 <i style="margin-right: 10%; color: #f35c2c" class="fa-solid fa-right-to-bracket fa-beat"></i><h4 style="color: #f35c2c; margin-right: 10%; margin-bottom: 0px;">Login</h4>
             </a>
         </section>
         <section th:fragment="botonLogOut" sec:authorize="isAuthenticated()">
             <form method="POST" th:action="@{/logout}">
-                <button class="btn btn-light" style="padding-right: 20px; text-align: center; display: flex; align-items: center; right: 26px; left: 90%; top: 85%; position: fixed;"><i style="margin-right: 10%; color: #f35c2c" class="fa-solid fa-right-from-bracket"></i></i><h4 style="color: #f35c2c; margin-right: 10%; margin-bottom: 0px;">Salir</h4></button>
+                <button class="btn btn-light" style="padding-right: 20px; text-align: center; display: flex; align-items: center; right: 26px; left: 90%; top: 88%; position: fixed;"><i style="margin-right: 10%; color: #f35c2c" class="fa-solid fa-right-from-bracket"></i></i><h4 style="color: #f35c2c; margin-right: 10%; margin-bottom: 0px;">Salir</h4></button>
             </form>
         </section>
         <section th:fragment="botonRegistro">
-            <a href="/registro" class="btn btn-light" style="padding-right: 20px; display: flex; align-items: center; left: 90%; top: 91%; position: fixed;">
+            <a href="/registro" class="btn btn-light" style="padding-right: 20px; display: flex; align-items: center; left: 90%; top: 94%; position: fixed;">
                 <i style="margin-right: 10%; color: #f35c2c" class="fa-solid fa-user-plus fa-beat"></i><h4 style="color: #f35c2c; margin-right: 10%; margin-bottom: 0px;">Registro</h4>
             </a>
         </section>
