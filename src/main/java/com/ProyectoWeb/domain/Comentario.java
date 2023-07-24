@@ -23,16 +23,16 @@ public class Comentario implements Serializable {
     @Column(name = "id_comentario")
     private Long idComentario;
     private String fechaEmision;
-    private String Comentario;
+    private String detalleComentario;
     private int valoracion;
     private boolean estado;
     
      public Comentario() {
     }
 
-    public Comentario(String fechaEmision, String Comentario, int valoracion, boolean estado) {
+    public Comentario(String fechaEmision, String detalleComentario, int valoracion, boolean estado) {
         this.fechaEmision = fechaEmision;
-        this.Comentario = Comentario;
+        this.detalleComentario = detalleComentario;
         this.valoracion = valoracion;
         this.estado = estado;
     }
