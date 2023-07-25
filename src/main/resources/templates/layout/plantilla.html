@@ -5,83 +5,83 @@
     <head th:fragment="head">
         <title>Donde John</title>
         <link rel="icon" href="/images/2-removebg-preview.png">
-        <meta charset="UTF-8"/>
-        <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
-        <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet"/>
-        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-        <script src="/js/rutina.js"></script>
-        <style>
-            #spamheader{
-                color: white;
-                font-weight: bold;
-                font-size: 20px
+            <meta charset="UTF-8"/>
+            <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+            <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet"/>
+            <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+            <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+            <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+            <script src="/js/rutina.js"></script>
+            <style>
+                #spamheader{
+                    color: white;
+                    font-weight: bold;
+                    font-size: 20px
 
-            }
-            body{
+                }
+                body{
 
-                background-color: #fba31b
-            }
+                    background-color: #fba31b
+                }
 
-            .figura {
-                position: relative;
-                display: inline-block;
-                margin: 20px;
+                .figura {
+                    position: relative;
+                    display: inline-block;
+                    margin: 20px;
 
-            }
+                }
 
-            .botonImagen {
-                width: 180px;
-                height: 70px;
-                border-radius: 10px;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
+                .botonImagen {
+                    width: 180px;
+                    height: 70px;
+                    border-radius: 10px;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
 
-                border: none;
-                background-color: rgba(255, 255, 255, 0.35);
-                font-weight: bold;
-                font-size: 25px
-            }
+                    border: none;
+                    background-color: rgba(255, 255, 255, 0.35);
+                    font-weight: bold;
+                    font-size: 25px
+                }
 
-            .botonImagen:hover {
+                .botonImagen:hover {
 
 
-                background-color: white;
-                width: 200px;
-                height: 90px;
-                font-size: 30px;
-                transition: 0.5s;
-            }
-            #dvImagenes{
+                    background-color: white;
+                    width: 200px;
+                    height: 90px;
+                    font-size: 30px;
+                    transition: 0.5s;
+                }
+                #dvImagenes{
 
-                display:flex;
-                justify-content: center;
+                    display:flex;
+                    justify-content: center;
 
-            }
-            #blurImagen{
-                filter: blur(1.5px);
-            }
+                }
+                #blurImagen{
+                    filter: blur(1.5px);
+                }
 
-            .filtro{
-                font-size: 20px;
-            }
-            .filtro:hover {
-                font-size: 22px;
-                font-weight: bold;
+                .filtro{
+                    font-size: 20px;
+                }
+                .filtro:hover {
+                    font-size: 22px;
+                    font-weight: bold;
 
-            }
-        </style>
+                }
+            </style>
 
-        <script>
-            function establecerFechaActual() {
-                var campoFecha = document.getElementById("fechaEmision");
-                var fechaActual = new Date();
-                campoFecha.value = fechaActual.toISOString().split("T")[0];
-            }
-        </script>
+            <script>
+                function establecerFechaActual() {
+                    var campoFecha = document.getElementById("fechaEmision");
+                    var fechaActual = new Date();
+                    campoFecha.value = fechaActual.toISOString().split("T")[0];
+                }
+            </script>
     </head>
     <body>
         <header th:fragment="header" class="header">
@@ -210,6 +210,40 @@
                         </button>
                     </figure>
                 </div>
+                <div id="dvImagenes">
+                    <figure class="figura">
+                        <img id="blurImagen" src="https://images.pexels.com/photos/834897/pexels-photo-834897.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" width="600"  height="350" alt="Imagen"/>
+                        <button class="botonImagen">
+                            <a  class="nav-link" th:href="@{/comentarios/mostrar}">Comentarios</a>
+                        </button>
+                    </figure>
+
+                </div>
+
+                <div>
+                    <h2 style="color: white; padding-left: 40px;">Comentarios</h2>
+                    <hr style="border: none;border-top: 3.5px solid #ffffff; margin: 0px 30px;opacity: 0.8"/>
+
+                    <div th:if="${comentarios != null and !comentarios.empty}" style="background-color: orange;" class="m-4">
+                        <center>
+                            <div style="display: flex; justify-content: center;">
+                                <div th:each="comentario, contador : ${comentarios}" class="card m-2" style="width: calc(33.33% - 20px); margin-right: 10px;">
+                                    <div class="card-body">
+                                        <p><strong> ID ANONIMO:[[${comentario.idComentario}]]</strong></p>
+                                        <p><strong>[[${comentario.fechaEmision}]]</strong></p>
+                                        <h5 class="card-title">[[${comentario.detalleComentario}]]</h5>
+                                        <p><strong><i style="color: yellow" class="fa-solid fa-star"></i>[[${comentario.valoracion}]]</strong></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </center>
+                       
+                            <a class="btn btn-primary "   th:href="@{/comentarios/mostrar}">Ver mas comentarios</a>
+                
+
+                    </div>
+                </div>
+
 
                 <footer style="width: 100%;background-color: #f35c2c" class=" text-white mt-5 p-2">
                     <div  class="container">

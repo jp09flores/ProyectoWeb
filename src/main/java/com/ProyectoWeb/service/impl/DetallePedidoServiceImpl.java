@@ -48,5 +48,11 @@ public class DetallePedidoServiceImpl implements DetallePedidoService{
           detallePedidoDao.delete(detallePedido);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<DetallePedido> UltimoDetalleXPedido() {
+       return detallePedidoDao.TraerDetallePedidosXUltimoPedido();
+    }
+
     
 }

@@ -17,4 +17,6 @@ public interface DetallePedidoService {
     
     
     public void delete(DetallePedido detallePedido);
+    
+    public List<DetallePedido> UltimoDetalleXPedido();
 }

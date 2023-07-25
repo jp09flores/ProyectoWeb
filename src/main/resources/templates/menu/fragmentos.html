@@ -32,11 +32,13 @@
                 <div class="text-white col-md-2 ">
                     <h3 style="margin: 10px 0px 0px 10px">MENU</h3>
                     <hr style="border: none; border-top: 3.5px solid #ffffff; margin-left : 5px ;opacity: 0.8">
-                         <a href="/images/Menu.jpg" download class="btn btn-light m-3">Descargar Menu</a>
+                        <a class="btn btn-dark m-3" 
+                           th:href="@{/menu/nuevo}" sec:authorize="hasRole('ROLE_ADMIN')">Agregar Producto</a>
+                        <a href="/images/Menu.jpg" download class="btn btn-light m-3">Descargar Menu</a>
                         <div class=" p-4">
-                           
+
                             <ul class="list-unstyled" style="font-size: larger; margin-bottom: 10px;">
-                                
+
                                 <li class=" filtro nav-item">
                                     <a class="nav-link" 
                                        aria-current="page" 
@@ -66,6 +68,25 @@
                                         <div class="card-body">
                                             <h5 class="card-title">[[${producto.nombreProducto}]]</h5>
                                             <p>[[${#numbers.formatDecimal(producto.precio, 1, 'DEFAULT', 2, 'DEFAULT')}]]</p> 
+                                            <form th:action="@{/menu/guardar}" th:object="${producto}"
+                                                  method="POST" class="was-validated" enctype="multipart/form-data">
+                                                <div class="mb-3">
+                                                    <input type="hidden" name="idProducto" th:value="${producto.idProducto}"/>
+                                                    <input type="hidden" name="categoria.idCategoria" th:value="${producto.categoria.idCategoria}"/>
+                                                    <input type="hidden" name="estado" value="0"/>
+                                                    <input type="hidden" name="nombreProducto" th:value="${producto.nombreProducto}"/>   
+                                                    <input type="hidden" name="precio" th:value="${producto.precio}"/>
+                                                    <input type="hidden" name="rutaImagen" th:value="${producto.rutaImagen}"/>                                                                                                                
+
+                                                </div>
+                                                <div style="display: flex;justify-content: center;"sec:authorize="hasRole('ROLE_ADMIN')">
+                                                    <button class="btn btn-danger " type="submit">Eliminar</button>
+                                                <a th:href="@{/menu/editar/}+${producto.idProducto}"
+                                               class="btn btn-success">
+                                                <i class="fas fa-pencil"></i> Editar</a>
+                                                </div>
+                                            </form>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -86,8 +107,145 @@
                 </div>
             </footer>
         </section>
+        <section th:fragment="modificarProducto">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <form th:action="@{/menu/guardar}" th:object="${producto}"
+                          method="POST" class="was-validated" enctype="multipart/form-data">
+
+                        <input type="hidden" name="idProducto" th:field="*{idProducto}"/>
+
+                        <section th:replace="~{menu/fragmentos :: botonesEditar2}"/>
+                        <div id=details>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4>Editar</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="mb-3">
+                                                    <label for="idCategoria">Categoria</label>
+                                                    <select th:field="*{categoria.idCategoria}"
+                                                            class="form-select" 
+                                                            aria-label="Default select example">
+                                                        <option th:each="c : ${categorias}" th:value="${c.idCategoria}" th:text="${c.nombreCategoria}">
+                                                        </option>
+                                                    </select>
+
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="estado">Estado</label>
+                                                    <input class="form-check-input" 
+                                                           type="checkbox" 
+                                                           th:field="*{estado}" 
+                                                           id="activo">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="nombreProducto">Nombre Producto</label>
+                                                    <input type="text" class="form-control" 
+                                                           th:field="*{nombreProducto}"
+                                                           required="true">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="precio">Precio</label>                                    
+                                                    <input type="number" class="form-control" 
+                                                           th:field="*{precio}" required="true"/>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="imagen">Imagen</label>
+                                                    <input class="form-control" type="url" name="rutaImagen" th:field="*{rutaImagen}"/>
+                                                    <br/>
+                                                    <img id="blah" th:src="@{${producto.rutaImagen}}" alt="your image" height="200"/>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section th:fragment="agregarProducto">
+            <div style="display: flex;">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <form th:action="@{/menu/guardar}" th:object="${producto}"
+                          method="POST" class="was-validated" enctype="multipart/form-data">
 
 
+                        <section th:replace="~{menu/fragmentos :: botonesEditar2}"/>
+                        <div id=details>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4>Editar</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="mb-3">
+                                                    <label for="idCategoria">Categoria</label>
+                                                    <select 
+                                                        name="categoria.idCategoria"
+                                                        class="form-select" 
+                                                        aria-label="Default select example">
+                                                        <option th:each="c : ${categorias}" th:value="${c.idCategoria}" th:text="${c.nombreCategoria}">
+                                                        </option>
+                                                    </select>
+
+                                                </div>
+                                                <div class="mb-3">
+                                                     <input type="hidden" name="estado" value="1"/>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="nombreProducto">Nombre Producto</label>
+                                                    <input type="text" class="form-control" 
+                                                           name="nombreProducto"
+                                                           required="true">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="precio">Precio</label>                                    
+                                                    <input type="number" class="form-control" 
+                                                           name="precio" required="true"/>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="imagen">Imagen</label>
+                                                    <input class="form-control" type="url" name="rutaImagen" required="true"/>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <section th:fragment="botonesEditar2">
+            <div class="container py-4 mb-4">
+                <div class="row">
+                    <div class="col-md-6 d-grid">
+                        <a th:href="@{/menu/listado}" class="btn btn-primary">
+                            <i class="fas fa-arrow-left"></i> REGRESAR
+                        </a>
+                    </div>
+
+                    <div class="col-md-6 d-grid">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-check"></i> GUARDAR
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
     </body>
 </html>

@@ -25,7 +25,7 @@ public class Pedido implements Serializable {
     
     @OneToMany
     @JoinColumn(name = "id_pedido")
-    private List<DetallePedido> detallePedido;
+    private List<DetallePedido> detallePedidos;
 
     public Pedido() {
     }

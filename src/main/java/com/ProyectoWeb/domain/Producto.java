@@ -31,7 +31,7 @@ public class Producto implements Serializable {
     @Column(name="id_producto")
     private Long idProducto;
     private String nombreProducto;
-    private double precio;
+    private int precio;
     private String rutaImagen;
     private boolean estado;
     
@@ -47,7 +47,7 @@ public class Producto implements Serializable {
     public Producto() {
     }
 
-    public Producto(String nombreProducto, double precio, String rutaImagen, boolean estado, Categoria categoria) {
+    public Producto(String nombreProducto, int precio, String rutaImagen, boolean estado, Categoria categoria) {
         this.nombreProducto = nombreProducto;
         this.precio = precio;
         this.rutaImagen = rutaImagen;

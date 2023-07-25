@@ -43,5 +43,13 @@ public class PedidoServiceImpl implements PedidoService{
         pedidoDao.save(pedido);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Pedido obtenerUltimoPedido() {
+       return pedidoDao.TraerUltimoDatoPedido();
+    }
+
+
+     
     
 }

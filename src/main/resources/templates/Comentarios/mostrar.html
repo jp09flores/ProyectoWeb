@@ -118,11 +118,12 @@
 </style>
 
     <section>
+        <div style="display: flex">
+            <div class="col-md-1"></div>
         <div class="col-md-10">
             <div style="--bs-card-border-color: orange">
                 <div th:if="${comentarios != null and !comentarios.empty}" style="background-color: orange;">
-                    <center>
-                        <div style="display: flex; justify-content: center; flex-wrap: wrap; margin-left: 220px;">
+                        <div style="display: flex; justify-content: center; flex-wrap: wrap;">
                             <div th:each="comentario, contador : ${comentarios}" class="card m-2" style="width: calc(33.33% - 20px); margin-right: 10px;">
                                 <div class="card-body">
                                     <p><strong> ID ANONIMO:[[${comentario.idComentario}]]</strong></p>
@@ -133,9 +134,9 @@
                                 </div>
                             </div>
                         </div>
-                    </center>
                 </div>
             </div>
+        </div>
         </div>
 
 <center>

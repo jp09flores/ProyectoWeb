@@ -13,4 +13,6 @@ public interface ComentarioService {
     
     public void delete(Comentario comentario);
     
+    public List<Comentario> PrimerosTresComentarios();
+    
 }

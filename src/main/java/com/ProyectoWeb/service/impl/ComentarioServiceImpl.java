@@ -39,5 +39,11 @@ public class ComentarioServiceImpl implements ComentarioService{
     public void delete(Comentario comentario) {
       comentarioDao.delete(comentario);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Comentario> PrimerosTresComentarios() {
+         return comentarioDao.TraerSolo3Datos();
+    }
   
 }

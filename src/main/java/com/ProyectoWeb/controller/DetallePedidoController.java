@@ -25,13 +25,15 @@ public class DetallePedidoController {
 
     @Autowired
     private ProductoService productoService;
-    
+
     @Autowired
     private PedidoService pedidoService;
 
     @GetMapping("/agregar/{idProducto}")
-    public String productoModificar(Producto producto, Model model) {
+    public String agregarProducto(Producto producto, Model model) {
+        Pedido pedido = pedidoService.obtenerUltimoPedido();
         producto = productoService.getProducto(producto);
+        model.addAttribute("pedido", pedido);
         model.addAttribute("producto", producto);
         return "/detallePedido/agregar";
     }
@@ -41,22 +43,38 @@ public class DetallePedidoController {
         detallePedidoService.save(detallePedido);
         return "redirect:/pedidos/listado";
     }
-     
-    
-    @GetMapping("/listado")                            
-    public String page(Model model) {
-        List<DetallePedido> detallePedidos = detallePedidoService.getDetallePedidos(true);
+     @PostMapping("/agregar/guardar2")
+    public String DetallePedidoGuardar2(DetallePedido detallePedido) {
+        detallePedidoService.save(detallePedido);
+        return "redirect:/detallePedido/listado";
+    }
+
+    @GetMapping("/listado")
+    public String page(Model model, Pedido pedido) {
+        List<DetallePedido> detallePedidos = detallePedidoService.UltimoDetalleXPedido();
         List<Producto> productos = productoService.getProductos(true);
         List<Pedido> pedidos = pedidoService.getPedidos(true);
         model.addAttribute("detallePedidos", detallePedidos);
+        model.addAttribute("TotalDetallePedidos", detallePedidos.size());
         model.addAttribute("productos", productos);
         model.addAttribute("pedidos", pedidos);
         return "/detallePedido/listado";
     }
-    
+
     @GetMapping("/eliminar/{cont}")
     public String detallePedidoEliminar(DetallePedido detallePedido) {
         detallePedidoService.delete(detallePedido);
         return "redirect:/detallePedido/listado";
+    }
+
+    @GetMapping("/editar/{cont}")
+    public String productoModificar( DetallePedido detallePedido, Model model) {
+        detallePedido = detallePedidoService.getDetallePedido(detallePedido);
+        List<Producto> producto = productoService.getProductos(true);
+        List<Pedido> pedido = pedidoService.getPedidos(true);
+        model.addAttribute("detallePedido", detallePedido);
+        model.addAttribute("producto", producto);
+        model.addAttribute("pedido", pedido);
+        return "/detallePedido/editar";
     }
 }

@@ -47,17 +47,17 @@ public class ProjectConfig implements WebMvcConfigurer {
                         "/registro","/logout","/images/**",
                         "/templates/**","/js/**","/webjars/**",
                         "/menu/listado","/contactenos/muestra",
-                        "/comentarios/mostrar", "/nosotros/muestra")
+                        "/comentarios/mostrar", "/nosotros/muestra" )
                 .permitAll()
                 .requestMatchers(
                         "/pedidos/**", "/menu/**",
                         "/contactenos/**", "/nosotros/**",
                         "/comentarios/**", "/producto/**",
-                        "/usuario/**")
+                        "/usuario/**","/detallePedido/**")
                 .hasRole("ADMIN")
                 .requestMatchers(
-                        "/pedidos/inicio"
-                ).hasAnyRole("USER")
+                        "/pedidos/**"
+                ).hasRole("USER")
                 )
                 .formLogin((form) -> form
                 .loginPage("/login").permitAll())

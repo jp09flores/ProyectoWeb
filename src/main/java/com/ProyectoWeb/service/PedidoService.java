@@ -14,4 +14,6 @@ public interface PedidoService {
     public Pedido getPedido(Pedido pedido);
 
     public void save(Pedido pedido);
+    
+    public Pedido obtenerUltimoPedido();
 }
