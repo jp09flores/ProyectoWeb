@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}"></head>
+    <body>
+        <header th:replace="~{layout/plantilla :: header}"></header>
+        <section>
+            <div class="container">
+                <div class="row my-5">
+                    <div class="col-md-5">
+                        <div>
+                            <img src="https://i.pinimg.com/474x/bd/f4/d3/bdf4d3fe1f9a17136319df951fe9b3e0.jpg" width="500" height="500">
+                        </div>
+                    </div>
+                    <div class="col-md-7 col md-offset-3 text-white">
+                        <h1> Información Personal </h1>
+
+                        <div class="text-white" style="margin-bottom: 50px; margin-top: 70px;">
+                            <h4>Nombre: Luis Daniel</h4><br>
+                            <h4>Apellidos: Nuñez Chacon</h4><br>
+                            <h4>Correo Eelctronico: luis@gmail.com</h4><br>
+                            <h4>Numero Telefonico: 7845-1245</h4><br>
+
+                            <hr>
+                        </div>
+                        <div class="card-footer col text-center" style="justify-content: space-evenly; display: flex;">
+                            <a class="btn btn-success text-white" style="height: 49px; text-align: center;  position: inherit; display: inline-flex;align-items: center;"><i class="fa-solid fa-eye" style="margin-right: 5px"><strong></i> Ver Historiales </a></strong>
+                            
+                            <form method="POST" th:action="@{/perfil/editar}">
+                                <button class="btn btn-dark text-white" style=" height: 49px; text-align: center;  position: inherit; display: inline-flex;align-items: center;"><i class="fa-solid fa-pen-to-square" style="margin-right: 5px"></i><strong> Editar Información </a></strong>
+                            </form>
+                            
+                            <form method="POST" th:action="@{/logout}">
+                                <button class="btn btn-danger text-white" style="height: 49px; text-align: center;  position: inherit; display: inline-flex;align-items: center;"><i class="fa-solid fa-door-open" style="margin-right: 5px"></i><strong> Cerrar Sesión </strong></button>
+                            </form>
+                            
+                            <a class="btn btn-info text-white" style="height: 49px; text-align: center;  position: inherit; display: inline-flex;align-items: center;"><i class="fa-solid fa-trash" style="margin-right: 5px"><strong></i> Inactivar Cuenta </a></strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer style="  height: 8%; position: absolute;bottom: 0;left: 0;width: 100%;background-color: #f35c2c; display: inline-flex; text-align: center; align-items: center;" class=" text-white mt-5 p-2">
+            <div  class="container">
+                <div class="col">
+                    <p class=" m-0 lead text-center">
+                        &COPY; Derechos Reservados 2023
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

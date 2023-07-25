@@ -110,9 +110,12 @@
                     <nav style = "background-color: #f35c2c;" class=" navbar-left pt-5">
                         <div>
                             <ul class=" navbar-nav">
-                                <li style="" class="nav-item dropdown text-center">
-
-                                    <a style="color:white" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><span id="spamheader">Lang</span></a>
+                                <li style="display: flex" class="nav-item dropdown text-center">
+                                    <div style="display: flex" sec:authorize="isAuthenticated()">
+                                        <a class="nav-link" th:href="@{/perfil/mostrar}"><span id="spamheader"><i class="fa-sharp fa-solid fa-circle-user fa-lg" style=" color: #f19c1a; margin-right: 20px"></i></span></a>                                    
+                                        <span id="spamheader" style="text-align: center; display: flex; align-items: center; margin-bottom: 0px; margin-right: 7px" sec:authentication="name">Username</span>
+                                    </div>
+                                    <a style="color:white" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><span id="spamheader">| Lang</span></a>
                                     <ul style = "background-color: #c03600" class="dropdown-menu">
                                         <li><a style="color:white;" class="dropdown-item"  th:href="@{/(lang=es)}"><strong>ES</strong></a></li>
                                         <li><a  style="color:white" class="dropdown-item" th:href="@{/(lang=en)}"><strong>EN</strong></a></li>
@@ -237,9 +240,9 @@
                                 </div>
                             </div>
                         </center>
-                       
-                            <a class="btn btn-primary "   th:href="@{/comentarios/mostrar}">Ver mas comentarios</a>
-                
+
+                        <a class="btn btn-primary "   th:href="@{/comentarios/mostrar}">Ver mas comentarios</a>
+
 
                     </div>
                 </div>

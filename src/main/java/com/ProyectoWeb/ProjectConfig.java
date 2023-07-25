@@ -27,12 +27,12 @@ public class ProjectConfig implements WebMvcConfigurer {
     @Bean
     public UserDetailsService users() {
         UserDetails admin = User.builder()
-                .username("luis")
+                .username("Luis")
                 .password("{noop}123")
                 .roles("USER", "ADMIN")
                 .build();
         UserDetails user = User.builder()
-                .username("erick")
+                .username("Jose")
                 .password("{noop}456")
                 .roles("USER")
                 .build();
@@ -44,20 +44,19 @@ public class ProjectConfig implements WebMvcConfigurer {
         http
                 .authorizeHttpRequests((request) -> request
                 .requestMatchers("/", "/index", "/errores/**",
-                        "/registro","/logout","/images/**",
-                        "/templates/**","/js/**","/webjars/**",
-                        "/menu/listado","/contactenos/muestra",
-                        "/comentarios/mostrar", "/nosotros/muestra" )
+                        "/registro", "/logout", "/images/**",
+                        "/templates/**", "/js/**", "/webjars/**",
+                        "/menu/listado", "/contactenos/muestra",
+                        "/comentarios/mostrar", "/nosotros/muestra")
                 .permitAll()
                 .requestMatchers(
                         "/pedidos/**", "/menu/**",
                         "/contactenos/**", "/nosotros/**",
-                        "/comentarios/**", "/producto/**",
-                        "/usuario/**","/detallePedido/**")
+                        "/comentarios/**", "/detallePedido/**")
                 .hasRole("ADMIN")
                 .requestMatchers(
-                        "/pedidos/**"
-                ).hasRole("USER")
+                        "/pedidos/**", "/perfil/**"
+                ).hasAnyRole("ADMIN", "USER")
                 )
                 .formLogin((form) -> form
                 .loginPage("/login").permitAll())

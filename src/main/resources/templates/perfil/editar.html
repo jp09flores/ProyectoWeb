@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}"></head>
+    <body>
+        <header th:replace="~{layout/plantilla :: header}"></header>
+        <section>
+            <div class="container">
+                <div class="row my-5">
+                    <div class="col-md-5">
+                        <div>
+                            <img src="https://i.pinimg.com/474x/bd/f4/d3/bdf4d3fe1f9a17136319df951fe9b3e0.jpg" width="500" height="500">
+                        </div>
+                    </div>
+                    <div class="col-md-7 col md-offset-3 text-white">
+                        <h1> Información Personal </h1>
+
+                        <div class="text-white" style="margin-bottom: 50px; margin-top: 70px;">
+                            <form>
+                                <div class="form-group row my-3">
+                                    <label class="col-md-5 my-auto text-white" for="name">Nombre: </label>
+                                    <div class="col-md-7 my-auto">
+                                        <input value="Luis Daniel Nuñez" readonly class="form-control" type="text" name="name" id="name"/></div>
+                                </div>
+                                <div class="form-group row my-3">
+                                    <label class="col-md-5 my-auto text-white" for="apellido1">Primer Apellido: </label>
+                                    <div class="col-md-7 my-auto">
+                                        <input value="Nuñez" readonly class="form-control" type="text" name="name" id="name"/></div>
+                                </div>
+                                <div class="form-group row my-3">
+                                    <label class="col-md-5 my-auto text-white" for="apellido2">Segundo Apellido: </label>
+                                    <div class="col-md-7 my-auto">
+                                        <input value="Chacón" readonly class="form-control" type="text" name="name" id="name"/></div>
+                                </div>
+                                <div class="form-group row my-3">
+                                    <label class="col-md-5 my-auto text-white" for="email">Correo Electronico: </label>
+                                    <div class="col-md-7 my-auto">
+                                        <input value="luis@gmail.com" readonly class="form-control" type="text" name="name" id="name"/></div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer col text-center" style="justify-content: space-evenly; display: flex;">
+                            <form method="POST" th:action="@{/perfil/mostrar}">
+                                <button class="btn btn-success text-white" style="height: 49px; text-align: center;  position: inherit; display: inline-flex;align-items: center;"><strong> Confirmar </strong></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer style="  height: 8%; position: absolute;bottom: 0;left: 0;width: 100%;background-color: #f35c2c; display: inline-flex; text-align: center; align-items: center;" class=" text-white mt-5 p-2">
+            <div  class="container">
+                <div class="col">
+                    <p class=" m-0 lead text-center">
+                        &COPY; Derechos Reservados 2023
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

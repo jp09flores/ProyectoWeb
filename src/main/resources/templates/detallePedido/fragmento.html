@@ -128,17 +128,17 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
-
+                        </div>
+                        <div style="display: flex; justify-content: end; ">
+                            <a th:href="@{/detallePedido/confirmar}"style="align-content: center;"
+                               class="m-1 btn btn-primary"><strong>Confirmar pedido</strong></a>
                         </div>
                         <div class=" text-center text-white p-2" th:if="${detallePedidos == null or detallePedidos.empty}">
                             <h3>La lista esta vacia!</h3>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </section>
