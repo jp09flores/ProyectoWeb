@@ -105,7 +105,7 @@ public class ProjectConfig implements WebMvcConfigurer {
                         "/comentarios/mostrar", "/nosotros/muestra")
                 .permitAll()
                 .requestMatchers(
-                        "/pedidos/**", "/menu/**",
+                         "/menu/**",
                         "/contactenos/**", "/nosotros/**",
                         "/comentarios/**", "/detallePedido/**")
                 .hasRole("ADMIN")
