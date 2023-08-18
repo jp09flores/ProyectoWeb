@@ -1,9 +1,16 @@
 package com.ProyectoWeb.domain;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.*;
+import java.util.List;
+import javax.validation.constraints.NotEmpty;
 import lombok.Data;
 
 @Data
@@ -12,39 +19,27 @@ import lombok.Data;
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario")
     private Long idUsuario;
     
-    @Column(name = "nombre_Usuario")
-    private String nombreUsuario;
+    @NotEmpty(message = "This field is required")
+    private String username; 
     
-    @Column(name = "primer_apellido")
+    @NotEmpty(message = "This field is required")
+    private String password; 
+    
+    private String nombre_usuario;
     private String primer_apellido;
+    private String segundo_apellido; 
+    private String correo;
+    private String telefono;
+    private String rutaImagen;
+    private boolean activo;
     
-    @Column(name = "segundo_apellido")
-    private String segundo_apellido;
-    private String email;
-    private String pass;
-
-    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    @JoinTable(name = "usuario_rol",joinColumns = @JoinColumn(name = "id_us", referencedColumnName = "id_usuario"),
-            inverseJoinColumns = @JoinColumn(name = "id_r", referencedColumnName = "id_rol"))
-    private Collection<Rol> roles;
-
-    public Usuario() {
-    }
-
-    public Usuario(String nombreUsuario, String primer_apellido, String segundo_apellido, String email, String pass, Collection<Rol> roles) {
-        this.nombreUsuario = nombreUsuario;
-        this.primer_apellido = primer_apellido;
-        this.segundo_apellido = segundo_apellido;
-        this.email = email;
-        this.pass = pass;
-        this.roles = roles;
-    }
-
-
+    @OneToMany
+    @JoinColumn(name = "id_usuario")
+    private List<Rol> roles;
 }
