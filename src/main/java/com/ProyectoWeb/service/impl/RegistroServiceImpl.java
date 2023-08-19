@@ -54,14 +54,11 @@ public class RegistroServiceImpl implements RegistroService {
     public Model crearUsuario(Model model, Usuario usuario) throws MessagingException {
         String mensaje;
         if (!usuarioService.existeUsuarioPorUsernameOCorreo(usuario.getUsername(), usuario.getCorreo())) {
-            String clave = demeClave();
-            
-            usuario.setPassword(clave);
-            usuario.setActivo(false);
-            
+            var codigo = new BCryptPasswordEncoder();
+            usuario.setPassword(codigo.encode(usuario.getPassword()));
+
             usuarioService.save(usuario, true);
             
-            enviaCorreoActivar(usuario, clave);
             
             mensaje = String.format(
                     messageSource.getMessage(
@@ -143,8 +140,8 @@ public class RegistroServiceImpl implements RegistroService {
                 "registro.correo.activar",
                 null, Locale.getDefault());
         mensaje = String.format(
-                mensaje, usuario.getNombre_usuario(),
-                usuario.getPrimer_apellido(),servidor,
+                mensaje, usuario.getNombreUsuario(),
+                usuario.getPrimerApellido(),servidor,
                 usuario.getUsername(), clave);
         String asunto = messageSource.getMessage(
                 "registro.mensaje.activacion",
@@ -158,8 +155,8 @@ public class RegistroServiceImpl implements RegistroService {
                 null,
                 Locale.getDefault());
         mensaje = String.format(
-                mensaje, usuario.getNombre_usuario(),
-                usuario.getPrimer_apellido(),servidor,
+                mensaje, usuario.getNombreUsuario(),
+                usuario.getPrimerApellido(),servidor,
                 usuario.getUsername(), clave);
         String asunto = messageSource.getMessage(
                 "registro.mensaje.recordar",

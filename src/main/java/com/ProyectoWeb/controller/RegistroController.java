@@ -33,7 +33,7 @@ public class RegistroController {
     @PostMapping("/crearUsuario")
     public String crearUsuario(Model model, Usuario usuario) throws MessagingException {
         model = registroService.crearUsuario(model, usuario);
-        return "/registro/salida";
+        return "/";
     }
 
     @GetMapping("/activacion/{usuario}/{id}")

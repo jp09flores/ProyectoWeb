@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}"></head>
+    <body>
+        <header th:replace="~{layout/plantilla :: header}"></header>
+        <section th:fragment="listadoProductos" id="productos">
+            <div class="mx-5">
+                <div class="text-white">
+                    <center>
+                        <br/>
+                        <h2>Carrito</h2>
+                        <hr style="border: none;border-top: 3.5px solid #ffffff; margin: 0px 30px;opacity:1; padding-bottom: 10px">
+                    </center>
+                </div>
+                <div class="row">
+                    <div class="col-md-2 ">
+                        <a th:href="@{/perfil/historial/}+${idUsuario}" style="width: 100%;" class="mt-2 btn btn-primary ">
+                            <i class="fas fa-arrow-left"></i> Regresar
+                        </a>
+                        <div class="mt-3 card text-center bg-dark text-white mb-3">
+                            <div class="card-body">
+                                <h3>#Pedidos: [[${TotalDetalle}]]</h3>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-10">
+                        <div th:each="detallePedido, contador : ${detallePedidos}" class="card mb-3" style="max-width: 100%;">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <div style="height: 200px;width:300px ; overflow: hidden;" class="container">
+                                        <img id="blah" class="p-1 img-fluid rounded-start" alt="" th:src="@{${detallePedido.producto.rutaImagen}}"
+                                             style="object-fit: cover;width: 100%;height: 100%">
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="">
+                                        <h5 class="card-header">[[${contador.count}]]. [[${detallePedido.producto.nombreProducto}]]</h5> 
+                                        <div style="display: flex;">
+
+                                            <div class="col-md-6" style="font-size: 20px">
+                                                <br/>
+                                                <p class="card-text">Precio: [[${detallePedido.producto.precio}]]</p>
+                                                <p class="card-text">Cantidad: [[${detallePedido.cantidadProducto}]]</p>
+                                                <p class="card-text">Comentarios: [[${detallePedido.comentarios}]]</p>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" text-center text-white p-2" th:if="${detallePedidos == null or detallePedidos.empty}">
+                            <h3>La lista esta vacia!</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

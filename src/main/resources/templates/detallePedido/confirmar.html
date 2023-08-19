@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}"></head>
+    <body>
+        <header th:replace="~{layout/plantilla :: header}"></header>
+
+
+        <div style="margin-top: 20px;display: flex">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <form method="POST"
+                      th:action="@{/detallePedido/confirmar/guardar}" th:object="${factura}"
+                      class="was-validated"
+                      enctype="multipart/form-data">
+
+
+                    <input type="hidden" name="pedido.idPedido" th:value="${pedido.idPedido}"/>
+                    <input type="hidden" class="form-control" id="fechaEmision" name="fecha"/>
+                    <input type="hidden" name="estado" value="1"/>
+                    <input type="hidden" name="total" th:value="${total}"/>
+                    <input type="hidden" name="usuario.idUsuario" th:value="${idUsuario}"/>
+
+                    <script>
+                        var fechaInput = document.getElementById("fechaEmision");
+                        var fechaActual = new Date();
+                        var fechaFormateada = fechaActual.toISOString().split('T')[0];
+                        fechaInput.value = fechaFormateada;
+                    </script>
+                    <a th:href="@{/detallePedido/listado}" class="btn  text-white my-3" style="width: 100%;background-color: #70410d">
+                        <i class="fas fa-arrow-left"></i> REGRESAR
+                    </a>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4>CONFIRMAR PEDIDO</h4>
+                                    </div>
+                                    <div class="card-body">
+
+                                        <div class="mb-3">
+                                            <label for="tipoTarjeta">Tipo de tarjeta</label>
+                                            <select name="tipoTarjeta" 
+                                                    class="form-select" 
+                                                    aria-label="Default select example">
+                                                <option>MasterCard</option>
+                                                <option >VISA</option>
+                                                <option >Discover</option>
+                                                <option >Other</option>
+
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="numTarjeta">Numero tarjeta</label>
+                                            <input type="number" class="form-control" name="numTarjeta" required="true"/>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="nombreTarjeta">Nombre del Propietario</label>
+                                            <input type="text" class="form-control" name="nombreTarjeta" required="true"/>
+                                        </div>
+
+                                        <div style="display: flex; justify-content: end; ">
+                                            <h2 style="margin-right: 20px">Total : [[${total}]]</h2>
+                                            <button style="width: 300px; font-size: 22px"type="submit" class="btn btn-primary">
+                                                <i class="fas fa-check"></i> <strong>Confirmar pedido</strong>
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+
+    </body>
+</html>

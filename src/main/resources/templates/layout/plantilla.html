@@ -102,6 +102,7 @@
                                 <li class="text-white nav-item px-2"><a class="nav-link" th:href="@{/contactenos/muestra}"><span id="spamheader">Contactenos</span></a></li>
                                 <li class="text-white nav-item px-2"><a class="nav-link" th:href="@{/nosotros/muestra}"><span id="spamheader">Nosotros</span></a></li>
                                 <li class="text-white nav-item px-2"><a class="nav-link" th:href="@{/comentarios/mostrar}"><span id="spamheader">Comentarios</span></a></li>
+                                <li class="text-white nav-item px-2"><a class="nav-link" th:href="@{admin/usuarios/listado}"sec:authorize="hasRole('ROLE_ADMIN')"><span id="spamheader">Usuarios</span></a></li>
                             </ul>
                         </div>
                     </nav>
