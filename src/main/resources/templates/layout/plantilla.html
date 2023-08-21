@@ -97,12 +97,12 @@
 
                         <div  class="navbar-collapse justify-content-between " id="navbarCollapse ">
                             <ul class=" navbar-nav">
-                                <li class="nav-item px-2" sec:authorize="isAuthenticated"><a class="nav-link" th:href="@{/pedidos/inicio}"><span id="spamheader">Pedidos</span></a></li>
-                                <li class="text-white nav-item px-2"><a class="nav-link" th:href="@{/menu/listado}"><span id="spamheader">Menu</span></a></li>
-                                <li class="text-white nav-item px-2"><a class="nav-link" th:href="@{/contactenos/muestra}"><span id="spamheader">Contactenos</span></a></li>
-                                <li class="text-white nav-item px-2"><a class="nav-link" th:href="@{/nosotros/muestra}"><span id="spamheader">Nosotros</span></a></li>
-                                <li class="text-white nav-item px-2"><a class="nav-link" th:href="@{/comentarios/mostrar}"><span id="spamheader">Comentarios</span></a></li>
-                                <li class="text-white nav-item px-2"><a class="nav-link" th:href="@{admin/usuarios/listado}"sec:authorize="hasRole('ROLE_ADMIN')"><span id="spamheader">Usuarios</span></a></li>
+                                <li class="nav-item px-2" sec:authorize="isAuthenticated"><a class="nav-link" th:href="@{/pedidos/inicio}"><span id="spamheader">[[#{plantilla.pedidos}]]</span></a></li>
+                                <li class="text-white nav-item px-2"><a class="nav-link" th:href="@{/menu/listado}"><span id="spamheader">[[#{plantilla.menu}]]</span></a></li>
+                                <li class="text-white nav-item px-2"><a class="nav-link" th:href="@{/contactenos/muestra}"><span id="spamheader">[[#{contactos.titulo}]]</span></a></li>
+                                <li class="text-white nav-item px-2"><a class="nav-link" th:href="@{/nosotros/muestra}"><span id="spamheader">[[#{plantilla.nosotros}]]</span></a></li>
+                                <li class="text-white nav-item px-2"><a class="nav-link" th:href="@{/comentarios/mostrar}"><span id="spamheader">[[#{plantilla.comentarios}]]</span></a></li>
+                                <li class="text-white nav-item px-2"><a class="nav-link" th:href="@{admin/usuarios/listado}"sec:authorize="hasRole('ROLE_ADMIN')"><span id="spamheader">[[#{plantilla.usuarios}]]</span></a></li>
                             </ul>
                         </div>
                     </nav>
@@ -130,17 +130,17 @@
 
         <section th:fragment="botonInicioSesion" sec:authorize="!isAuthenticated()">
             <a th:href="@{/login}" class="btn btn-light" style="padding-right: 20px; text-align: center; display: flex; align-items: center; right: 26px; left: 90%; top: 88%; position: fixed;">
-                <i style="margin-right: 10%; color: #f35c2c" class="fa-solid fa-right-to-bracket fa-beat"></i><h4 style="color: #f35c2c; margin-right: 10%; margin-bottom: 0px;">Login</h4>
+                <i style="margin-right: 10%; color: #f35c2c" class="fa-solid fa-right-to-bracket fa-beat"></i><h4 style="color: #f35c2c; margin-right: 10%; margin-bottom: 0px;">[[#{login.ingresar}]]</h4>
             </a>
         </section>
         <section th:fragment="botonLogOut" sec:authorize="isAuthenticated()">
             <form method="POST" th:action="@{/logout}">
-                <button class="btn btn-light" style="padding-right: 20px; text-align: center; display: flex; align-items: center; right: 26px; left: 90%; top: 88%; position: fixed;"><i style="margin-right: 10%; color: #f35c2c" class="fa-solid fa-right-from-bracket"></i></i><h4 style="color: #f35c2c; margin-right: 10%; margin-bottom: 0px;">Salir</h4></button>
+                <button class="btn btn-light" style="padding-right: 20px; text-align: center; display: flex; align-items: center; right: 26px; left: 90%; top: 88%; position: fixed;"><i style="margin-right: 10%; color: #f35c2c" class="fa-solid fa-right-from-bracket"></i></i><h4 style="color: #f35c2c; margin-right: 10%; margin-bottom: 0px;">[[#{accion.salir}]]</h4></button>
             </form>
         </section>
         <section th:fragment="botonRegistro">
             <a href="/registro/nuevo" class="btn btn-light" style="padding-right: 20px; display: flex; align-items: center; left: 90%; top: 94%; position: fixed;">
-                <i style="margin-right: 10%; color: #f35c2c" class="fa-solid fa-user-plus fa-beat"></i><h4 style="color: #f35c2c; margin-right: 10%; margin-bottom: 0px;">Registro</h4>
+                <i style="margin-right: 10%; color: #f35c2c" class="fa-solid fa-user-plus fa-beat"></i><h4 style="color: #f35c2c; margin-right: 10%; margin-bottom: 0px;">[[#{login.registro}]]</h4>
             </a>
         </section>
 
@@ -181,7 +181,7 @@
             <br/>
             <br/>
             <br/>
-            <h2 style="color: white; padding-left: 40px;">Accesos Directos</h2>
+            <h2 style="color: white; padding-left: 40px;">[[#{home.accesos}]]</h2>
             <hr style="border: none;border-top: 3.5px solid #ffffff; margin: 0px 30px;opacity: 0.8">
                 <br/>
 
@@ -189,13 +189,13 @@
                     <figure class="figura">
                         <img id="blurImagen" src="https://economiasustentable.com/wp-content/uploads/2021/01/entrega-comida.jpg" width="600" height="350" alt="Imagen" />
                         <button class="botonImagen">
-                            <a  class="nav-link" th:href="@{/pedidos/inicio}">Pedidos</a>
+                            <a  class="nav-link" th:href="@{/pedidos/inicio}">[[#{plantilla.pedidos}]]</a>
                         </button>
                     </figure>
                     <figure class="figura">
                         <img id="blurImagen" src="https://www.unileverfoodsolutionslatam.com/tendencias/reingenieria-de-menu/mas-con-menos/ingenieria-menu-platillos-eficientes/jcr:content/parsys/set2/row7/span8/image.img.png/1632347749300.png" width="600" height="350" alt="Imagen"  />
                         <button class="botonImagen">
-                            <a  class="nav-link"th:href="@{/menu/listado}">Menu</a>
+                            <a  class="nav-link"th:href="@{/menu/listado}">[[#{plantilla.menu}]]</a>
                         </button>
                     </figure>
                 </div>
@@ -204,13 +204,13 @@
                     <figure class="figura">
                         <img id="blurImagen" src="https://images.pexels.com/photos/1416530/pexels-photo-1416530.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" width="600"  height="350" alt="Imagen"/>
                         <button class="botonImagen">
-                            <a  class="nav-link" th:href="@{/contactenos/muestra}">Contactenos</a>
+                            <a  class="nav-link" th:href="@{/contactenos/muestra}">[[#{contactos.titulo}]]</a>
                         </button>
                     </figure>
                     <figure class="figura">
                         <img id="blurImagen" src="https://images.pexels.com/photos/16617576/pexels-photo-16617576/free-photo-of-gente-amigos-fiesta-grupo.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" width="600" height="350" alt="Imagen"/>
                         <button class="botonImagen">
-                            <a  class="nav-link" th:href="@{/nosotros/muestra}">Nosotros</a>
+                            <a  class="nav-link" th:href="@{/nosotros/muestra}">[[#{plantilla.nosotros}]]</a>
                         </button>
                     </figure>
                 </div>
@@ -218,14 +218,14 @@
                     <figure class="figura">
                         <img id="blurImagen" src="https://images.pexels.com/photos/834897/pexels-photo-834897.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" width="600"  height="350" alt="Imagen"/>
                         <button class="botonImagen">
-                            <a  class="nav-link" th:href="@{/comentarios/mostrar}">Comentarios</a>
+                            <a  class="nav-link" th:href="@{/comentarios/mostrar}">[[#{plantilla.comentarios}]]</a>
                         </button>
                     </figure>
 
                 </div>
 
                 <div>
-                    <h2 style="color: white; padding-left: 40px;">Comentarios</h2>
+                    <h2 style="color: white; padding-left: 40px;">[[#{plantilla.comentarios}]]</h2>
                     <hr style="border: none;border-top: 3.5px solid #ffffff; margin: 0px 30px;opacity: 0.8"/>
 
                     <div th:if="${comentarios != null and !comentarios.empty}" style="background-color: orange;" class="m-4">
@@ -233,16 +233,16 @@
                             <div style="display: flex; justify-content: center;">
                                 <div th:each="comentario, contador : ${comentarios}" class="card m-2" style="width: calc(33.33% - 20px); margin-right: 10px;">
                                     <div class="card-body">
-                                        <p><strong> ID ANONIMO:[[${comentario.idComentario}]]</strong></p>
-                                        <p><strong>[[${comentario.fechaEmision}]]</strong></p>
-                                        <h5 class="card-title">[[${comentario.detalleComentario}]]</h5>
-                                        <p><strong><i style="color: yellow" class="fa-solid fa-star"></i>[[${comentario.valoracion}]]</strong></p>
+                                        <p><strong> [[#{comentarios.id}]]: [[${comentario.idComentario}]]</strong></p>
+                                    <p><strong>[[${comentario.fechaEmision}]]</strong></p>
+                                    <h5 class="card-title">[[${comentario.detalleComentario}]]</h5>
+                                    <p><strong><i style="color: yellow" class="fa-solid fa-star"></i>[[${comentario.valoracion}]]</strong></p>
                                     </div>
                                 </div>
                             </div>
                         </center>
 
-                        <a class="btn btn-primary "   th:href="@{/comentarios/mostrar}">Ver mas comentarios</a>
+                        <a class="btn btn-primary "   th:href="@{/comentarios/mostrar}">[[#{plantilla.verComentarios}]]</a>
 
 
                     </div>
@@ -253,7 +253,7 @@
                     <div  class="container">
                         <div class="col">
                             <p class=" m-0 lead text-center">
-                                &COPY; Derechos Reservados 2023
+                                &COPY; [[#{plantilla.derechos}]]
                             </p>
                         </div>
                     </div>

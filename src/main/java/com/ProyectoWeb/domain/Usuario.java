@@ -31,9 +31,9 @@ public class Usuario implements Serializable {
     @NotEmpty(message = "This field is required")
     private String password; 
     
-    private String nombre_usuario;
-    private String primer_apellido;
-    private String segundo_apellido; 
+    private String nombreUsuario;
+    private String primerApellido;
+    private String segundoApellido; 
     private String correo;
     private String telefono;
     private String rutaImagen;
@@ -42,4 +42,11 @@ public class Usuario implements Serializable {
     @OneToMany
     @JoinColumn(name = "id_usuario")
     private List<Rol> roles;
+    
+     @OneToMany
+    @JoinColumn(name = "id_usuario")
+    private List<Factura> facturas;
+     
+     
+    
 }

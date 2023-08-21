@@ -13,30 +13,30 @@
                         </div>
                     </div>
                     <div class="col-md-7 col md-offset-3 text-white">
-                        <h1> Información Personal </h1>
+                        <h1> [[#{perfil.info}]] </h1>
 
                         <div class="text-white" style="margin-bottom: 50px; margin-top: 70px;">
-                            <h4>Usuario: [[${Usuario}]]</h4><br/>
-                            <h4>Nombre: [[${Nombre}]]</h4><br/>
+                            <h4>[[#{usuario.username}]]: [[${Usuario}]]</h4><br/>
+                            <h4>[[#{usuario.nombre}]]: [[${Nombre}]]</h4><br/>
                             
-                            <h4>Apellidos: [[${PriApellido}]] [[${SegApellido}]]</h4><br/>
-                            <h4>Correo Electronico: [[${Correo}]]</h4><br/>
-                            <h4>Numero Telefonico: [[${Telefono}]]</h4><br/>
+                            <h4>[[#{usuario.apellidos}]]: [[${PriApellido}]] [[${SegApellido}]]</h4><br/>
+                            <h4>[[#{usuario.correo}]]: [[${Correo}]]</h4><br/>
+                            <h4>[[#{usuario.telefono}]]: [[${Telefono}]]</h4><br/>
 
                             <hr>
                         </div>
                         <div class="card-footer col text-center" style="justify-content: space-evenly; display: flex;">
-                            <a th:href="@{/perfil/historial/}+${idUsuario}" class="btn btn-success text-white" style="height: 49px; text-align: center;  position: inherit; display: inline-flex;align-items: center;"><i class="fa-solid fa-eye" style="margin-right: 5px"><strong></i> Ver Historiales </a></strong>
+                            <a th:href="@{/perfil/historial/}+${idUsuario}" class="btn btn-success text-white" style="height: 49px; text-align: center;  position: inherit; display: inline-flex;align-items: center;"><i class="fa-solid fa-eye" style="margin-right: 5px"><strong></i> [[#{accion.historial}]] </a></strong>
                             
                             <form method="POST" th:action="@{/perfil/editar}">
-                                <button class="btn btn-dark text-white" style=" height: 49px; text-align: center;  position: inherit; display: inline-flex;align-items: center;"><i class="fa-solid fa-pen-to-square" style="margin-right: 5px"></i><strong> Editar Información </a></strong>
+                                <button class="btn btn-dark text-white" style=" height: 49px; text-align: center;  position: inherit; display: inline-flex;align-items: center;"><i class="fa-solid fa-pen-to-square" style="margin-right: 5px"></i><strong> [[#{accion.editar}]] </strong>
                             </form>
                             
                             <form method="POST" th:action="@{/logout}">
-                                <button class="btn btn-danger text-white" style="height: 49px; text-align: center;  position: inherit; display: inline-flex;align-items: center;"><i class="fa-solid fa-door-open" style="margin-right: 5px"></i><strong> Cerrar Sesión </strong></button>
+                                <button class="btn btn-danger text-white" style="height: 49px; text-align: center;  position: inherit; display: inline-flex;align-items: center;"><i class="fa-solid fa-door-open" style="margin-right: 5px"></i><strong> [[#{accion.cerrarSesion}]] </strong></button>
                             </form>
                             
-                            <a class="btn btn-info text-white" style="height: 49px; text-align: center;  position: inherit; display: inline-flex;align-items: center;"><i class="fa-solid fa-trash" style="margin-right: 5px"><strong></i> Inactivar Cuenta </a></strong>
+                            <a class="btn btn-info text-white" style="height: 49px; text-align: center;  position: inherit; display: inline-flex;align-items: center;"><i class="fa-solid fa-trash" style="margin-right: 5px"><strong></i> [[#{accion.inactivar}]] </a></strong>
                         </div>
                     </div>
                 </div>

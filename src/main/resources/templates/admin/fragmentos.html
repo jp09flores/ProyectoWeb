@@ -11,18 +11,18 @@
             <div class="text-white">
                 <center>
                     <br/>
-                    <h2>Lista Usuarios</h2>
+                    <h2>[[#{admin.lista}]]</h2>
                     <hr style="border: none;border-top: 3.5px solid #ffffff; margin: 0px 30px;opacity:1; padding-bottom: 10px">
                 </center>
             </div>
             <div style="display:flex;">
                 <div class="col-md-2">
                     <a th:href="@{/}" style="width: 100%;" class="mt-2 btn btn-primary ">
-                        <i class="fas fa-arrow-left"></i> Regresar
+                        <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
                     </a>
                     <div class="mt-3 card text-center bg-dark text-white mb-3">
                         <div class="card-body">
-                            <h3>Usuarios:  [[${totalUsuarios}]]</h3>
+                            <h3>[[#{admin.usuarios}]]:  [[${totalUsuarios}]]</h3>
 
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                                             <p>[[${usuario.nombreUsuario}]] [[${usuario.primerApellido}]] [[${usuario.segundoApellido}]]</p>
                                             <p>[[${usuario.correo}]]</p>
                                             <p>[[${usuario.telefono}]]</p>                  
-                                            <a th:href="@{/admin/usuarios/modificar/}+${usuario.idUsuario} " style="width: 100%"class="btn btn-primary">Editar</a>
+                                            <a th:href="@{/admin/usuarios/modificar/}+${usuario.idUsuario} " style="width: 100%"class="btn btn-primary">[[#{accion.editar}]]</a>
                                         </div>
                                     </div>
                                 </div>
@@ -66,7 +66,7 @@
                 <div class="col-md-8">
                     <center>
                         <br/>
-                        <h2 class="text-white">Editar Usuario</h2>
+                        <h2 class="text-white">[[#{admin.editarUsuario}]]</h2>
                         <hr style="border: none;border-top: 3.5px solid #ffffff; margin: 0px 30px;opacity:1; padding-bottom: 10px">
                     </center>
                     
@@ -94,14 +94,14 @@
                                                            name="nombreUsuario"/>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="primerApellido">[[#{usuario.apellidos}]]</label>
+                                                    <label for="primerApellido">[[#{usuario.Primerapellido}]]</label>
                                                     <input style="margin-bottom: 16px;" 
                                                            type="text" class="form-control" 
                                                            th:field="*{primerApellido}"
                                                            name="primerApellido" required="true"/>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="primerApellido">[[#{usuario.apellidos}]]</label>
+                                                    <label for="primerApellido">[[#{usuario.Segundoapellido}]]</label>
                                                     <input style="margin-bottom: 16px;" 
                                                            type="text" class="form-control" 
                                                            th:field="*{segundoApellido}"
@@ -121,19 +121,13 @@
                                                            name="telefono" th:field="*{telefono}"  
                                                            required="true"/>
                                                 </div>
-                                                <div class="mb-3">                                    
-                                                    <label for="activo">[[#{usuario.activo}]]</label>                                    
-                                                    <input type="url" 
-                                                           class="form-control" 
-                                                           name="rutaImagen" 
-                                                           th:field="*{rutaImagen}" required="true"/>                                 
-                                                </div>
+                                               
                                                 <button type="submit" class="btn btn-success " 
                                                         style="
                                                         padding-top: 15px;
                                                         padding-bottom: 15px;
                                                         width: 100%;
-                                                        ">Actualizar
+                                                        ">[[#{accion.actualizar}]]
                                                 </button>
                                             </div>
                                         </div>

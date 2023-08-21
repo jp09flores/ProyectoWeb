@@ -13,7 +13,7 @@
                         <a class="nav-link" 
                            aria-current="page" 
                            href="/menu/listado"
-                           >[[#{pruebas.todas}]]</a>
+                           >[[#{pedidos.todos}]]</a>
 
                     </li>
                     <li th:each="categoria : ${categorias}" class="">
@@ -26,15 +26,14 @@
         </section>
 
         <section th:fragment="listadoMenu" id="produtosMenu">
-            <a name="arriba"></a>
             <div style="--bs-gutter-x: 0;"class="row">
 
                 <div class="text-white col-md-2 ">
                     <h3 style="margin: 10px 0px 0px 10px">MENU</h3>
                     <hr style="border: none; border-top: 3.5px solid #ffffff; margin-left : 5px ;opacity: 0.8">
                         <a class="btn btn-dark m-3" 
-                           th:href="@{/menu/nuevo}" sec:authorize="hasRole('ROLE_ADMIN')">Agregar Producto</a>
-                        <a href="/images/Menu.jpg" download class="btn btn-light m-3">Descargar Menu</a>
+                           th:href="@{/menu/nuevo}" sec:authorize="hasRole('ROLE_ADMIN')">[[#{accion.nuevo}]]</a>
+                        <a href="/images/Menu.jpg" download class="btn btn-light m-3">[[#{menu.descargar}]]</a>
                         <div class=" p-4">
 
                             <ul class="list-unstyled" style="font-size: larger; margin-bottom: 10px;">
@@ -80,19 +79,17 @@
 
                                                 </div>
                                                 <div style="display: flex;justify-content: center;"sec:authorize="hasRole('ROLE_ADMIN')">
-                                                    <button class="btn btn-danger " type="submit">Eliminar</button>
+                                                    <button class="btn btn-danger " type="submit"><i class="fas fa-trash"></i>[[#{accion.eliminar}]]</button>
                                                 <a th:href="@{/menu/editar/}+${producto.idProducto}"
                                                class="btn btn-success">
-                                                <i class="fas fa-pencil"></i> Editar</a>
+                                                <i class="fas fa-pencil"></i> [[#{accion.editar}]]</a>
                                                 </div>
                                             </form>
                                             
                                         </div>
                                     </div>
                                 </div>
-
-                            </center>
-                            <a style="display:flex"class="mr-4 justify-content-end" href="#arriba">Ir arriba</a>
+                            </center>  
                         </div>
                     </div>
                 </div>
@@ -101,7 +98,7 @@
                 <div  class="container">
                     <div class="col">
                         <p class=" m-0 lead text-center">
-                            &COPY; Derechos Reservados 2023
+                            &COPY; [[#{plantilla.derechos}]]
                         </p>
                     </div>
                 </div>
@@ -123,11 +120,11 @@
                                     <div class="col">
                                         <div class="card">
                                             <div class="card-header">
-                                                <h4>Editar</h4>
+                                                <h4>[[#{accion.editar}]]</h4>
                                             </div>
                                             <div class="card-body">
                                                 <div class="mb-3">
-                                                    <label for="idCategoria">Categoria</label>
+                                                    <label for="idCategoria">[[#{menu.categoria}]]</label>
                                                     <select th:field="*{categoria.idCategoria}"
                                                             class="form-select" 
                                                             aria-label="Default select example">
@@ -137,25 +134,25 @@
 
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="estado">Estado</label>
+                                                    <label for="estado">[[#{menu.estado}]]</label>
                                                     <input class="form-check-input" 
                                                            type="checkbox" 
                                                            th:field="*{estado}" 
                                                            id="activo">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="nombreProducto">Nombre Producto</label>
+                                                    <label for="nombreProducto">[[#{menu.nombre}]]</label>
                                                     <input type="text" class="form-control" 
                                                            th:field="*{nombreProducto}"
                                                            required="true">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="precio">Precio</label>                                    
+                                                    <label for="precio">[[#{detallePedido.precio}]]</label>                                    
                                                     <input type="number" class="form-control" 
                                                            th:field="*{precio}" required="true"/>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="imagen">Imagen</label>
+                                                    <label for="imagen">[[#{menu.imagen}]]</label>
                                                     <input class="form-control" type="url" name="rutaImagen" th:field="*{rutaImagen}"/>
                                                     <br/>
                                                     <img id="blah" th:src="@{${producto.rutaImagen}}" alt="your image" height="200"/>
@@ -186,11 +183,11 @@
                                     <div class="col">
                                         <div class="card">
                                             <div class="card-header">
-                                                <h4>Editar</h4>
+                                                <h4>[[#{accion.editar}]]</h4>
                                             </div>
                                             <div class="card-body">
                                                 <div class="mb-3">
-                                                    <label for="idCategoria">Categoria</label>
+                                                    <label for="idCategoria">[[#{menu.categoria}]]</label>
                                                     <select 
                                                         name="categoria.idCategoria"
                                                         class="form-select" 
@@ -204,18 +201,18 @@
                                                      <input type="hidden" name="estado" value="1"/>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="nombreProducto">Nombre Producto</label>
+                                                    <label for="nombreProducto">[[#{menu.nombre}]]</label>
                                                     <input type="text" class="form-control" 
                                                            name="nombreProducto"
                                                            required="true">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="precio">Precio</label>                                    
+                                                    <label for="precio">[[#{detallePedido.precio}]]</label>                                    
                                                     <input type="number" class="form-control" 
                                                            name="precio" required="true"/>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="imagen">Imagen</label>
+                                                    <label for="imagen">[[#{menu.imagen}]]</label>
                                                     <input class="form-control" type="url" name="rutaImagen" required="true"/>
 
                                                 </div>
@@ -234,13 +231,13 @@
                 <div class="row">
                     <div class="col-md-6 d-grid">
                         <a th:href="@{/menu/listado}" class="btn btn-primary">
-                            <i class="fas fa-arrow-left"></i> REGRESAR
+                            <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
                         </a>
                     </div>
 
                     <div class="col-md-6 d-grid">
                         <button type="submit" class="btn btn-success">
-                            <i class="fas fa-check"></i> GUARDAR
+                            <i class="fas fa-check"></i> [[#{accion.guardar}]]
                         </button>
                     </div>
                 </div>

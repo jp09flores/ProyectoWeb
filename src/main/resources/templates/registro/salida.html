@@ -15,6 +15,13 @@
                         <div class="card-body">
                             <strong>[[${mensaje}]]</strong>
                         </div>
+                        <a th:href="@{/registro/nuevo}" class="btn btn-primary">
+                            <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
+                        </a>
+                        <br/>
+                        <a th:href="@{/}" class="btn btn-primary">
+                            <i class="fas fa-house"></i> HOME
+                        </a>
                     </div>
                 </div>
             </div>

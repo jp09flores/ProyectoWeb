@@ -8,7 +8,7 @@
 
         <section style="display: grid; justify-content: center;">
             <div style="margin-right: 15px;">
-                <p style="color: white; text-align: center; font-size: 40px; font-weight: bold;"><strong>CONTACTOS</strong></p>
+                <p style="color: white; text-align: center; font-size: 40px; font-weight: bold;"><strong>[[#{contactos.titulo}]]</strong></p>
             </div>
             <div style="margin-top: 80px;display: flex; column-gap: 100px;">
                 <div>
@@ -42,32 +42,32 @@
                             <div class="col">
                                 <div class="card text-white" style="background-color: #fba31b">
                                     <div class="card-header">
-                                        <h4 class="text-center">Mas informacion</h4>
+                                        <h4 class="text-center">[[#{contactos.info}]]</h4>
                                     </div>
                                     <div class="card-body">
 
                                         
                                         <div class="mb-3">
-                                            <label for="nombre">Nombre</label>
+                                            <label for="nombre">[[#{usuario.nombre}]]</label>
                                             <input type="text" class="form-control" name="nombre" required="true"/>
                                         </div>
 
                                         <div class="mb-3">
-                                            <label for="apellidos">Apellidos</label>
+                                            <label for="apellidos">[[#{usuario.apellidos}]]</label>
                                             <input type="text" class="form-control" name="apellidos" required="true"/>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="correo">Correo</label>
+                                            <label for="correo">[[#{usuario.correo}]]</label>
                                             <input type="email" class="form-control" name="correo" required="true"/>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="telefono">Telefono</label>
+                                            <label for="telefono">[[#{usuario.telefono}]]</label>
                                             <input type="tel" class="form-control" name="telefono" required="true"/>
                                         </div>
 
                                         <div style="display: flex; justify-content: center; ">
                                             <button style="width: 300px; font-size: 22px"type="submit" class="btn btn-success">
-                                                 <strong>Enviar Formulario</strong>
+                                                 <strong>[[#{accion.enviar}]]</strong>
                                             </button>
                                         </div>
 
@@ -86,7 +86,7 @@
             <div  class="container">
                 <div class="col">
                     <p class=" m-0 lead text-center">
-                        &COPY; Derechos Reservados 2023
+                        &COPY; [[#{plantilla.derechos}]]
                     </p>
                 </div>
             </div>

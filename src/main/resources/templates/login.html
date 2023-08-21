@@ -16,23 +16,23 @@
                         <div class="card-body my-5">
                             <form method="POST" th:action="@{/login}">
                                 <div class="form-group row my-3">
-                                    <label class="col-md-5 my-auto text-white" for="username"><i class="fas fa-user-lock" style="margin-right: 15px"></i>Nombre de Usuario: </label>
+                                    <label class="col-md-5 my-auto text-white" for="username"><i class="fas fa-user-lock" style="margin-right: 15px"></i>[[#{login.nombreUsuario}]] </label>
                                     <div class="col-md-7 my-auto">
                                         <input class="form-control" type="text" name="username" id="username"/></div></div>
                                 <div class="form-group row my-3">
-                                    <label class="col-md-5 my-auto text-white" for="password"><i class="fas fa-key" style="margin-right: 15px"></i>Contraseña: </label>
+                                    <label class="col-md-5 my-auto text-white" for="password"><i class="fas fa-key" style="margin-right: 15px"></i>[[#{login.password}]] </label>
                                     <div class="col-md-7 my-auto"><input class="form-control" type="password" name="password" id="password"/></div></div>
                                 <hr style="margin-top: 40px; color: white">
                                     <div class="card-footer col text-center">
-                                        <a th:href="@{/registro/nuevo}" class="btn btn-danger text-white" style="height: 49px; text-align: center;  position: inherit; display: inline-flex;align-items: center;"><i class="fas fa-user-plus" style="margin-right: 5px"><strong></i> Registrarse </a></strong></button>
+                                        <a th:href="@{/registro/nuevo}" class="btn btn-danger text-white" style="height: 49px; text-align: center;  position: inherit; display: inline-flex;align-items: center;"><i class="fas fa-user-plus" style="margin-right: 5px"><strong></i> [[#{login.registro}]] </a></strong></button>
                                         <button class="btn btn-success" type="submit">
-                                            <span class="btn text-white"><i class="fas fa-sign-in-alt" style="margin-right: 5px"><strong></i> Ingresar </span></strong></button>
+                                            <span class="btn text-white"><i class="fas fa-sign-in-alt" style="margin-right: 5px"><strong></i> [[#{login.ingresar}]] </span></strong></button>
                                     </div>
                             </form>                            
                         </div>
                     </div>
                     <div th:if="${param.error != null}">
-                        <h3> Credenciales Erróneas </h3>
+                        <h3> [[#{login.credencialesError}]] </h3>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -44,7 +44,7 @@
             <div  class="container">
                 <div class="col">
                     <p class=" m-0 lead text-center">
-                        &COPY; Derechos Reservados 2023
+                        &COPY; [[#{plantilla.derechos}]]
                     </p>
                 </div>
             </div>
