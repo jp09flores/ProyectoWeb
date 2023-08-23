@@ -31,7 +31,7 @@ public class Categoria implements Serializable {
     private boolean activo;
 
     @OneToMany
-    @JoinColumn(name = "id_categoria")
+    @JoinColumn(name = "id_categoria",updatable=false)
     private List<Producto> productos;
 
     public Categoria() {

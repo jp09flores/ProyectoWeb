@@ -41,7 +41,7 @@ public class Producto implements Serializable {
     
     
     @OneToMany
-    @JoinColumn(name = "id_producto")
+    @JoinColumn(name = "id_producto",updatable=false)
     private List<DetallePedido> detallePedido;
 
     public Producto() {

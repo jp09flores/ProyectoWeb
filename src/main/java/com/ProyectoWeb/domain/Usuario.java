@@ -40,11 +40,11 @@ public class Usuario implements Serializable {
     private boolean activo;
     
     @OneToMany
-    @JoinColumn(name = "id_usuario")
+    @JoinColumn(name = "id_usuario",updatable=false)
     private List<Rol> roles;
     
      @OneToMany
-    @JoinColumn(name = "id_usuario")
+    @JoinColumn(name = "id_usuario" ,updatable=false)
     private List<Factura> facturas;
      
      

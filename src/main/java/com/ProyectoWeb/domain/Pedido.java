@@ -24,11 +24,11 @@ public class Pedido implements Serializable {
     
     
     @OneToMany
-    @JoinColumn(name = "id_pedido")
+    @JoinColumn(name = "id_pedido",updatable=false)
     private List<DetallePedido> detallePedidos;
     
     @OneToMany
-    @JoinColumn(name = "id_pedido")
+    @JoinColumn(name = "id_pedido",updatable=false)
     private List<Factura> facturas;
 
     public Pedido() {

@@ -76,6 +76,15 @@ public class PerfilController {
 
     @PostMapping("/guardar")
     public String guardarUsuario(Usuario usuario) {
+         if (usuario.getIdUsuario() != null && usuario.getIdUsuario() > 0) {
+            var temp = usuarioService.getUsuario(usuario);
+            usuario.setPassword(temp.getPassword());
+            usuario.setUsername(temp.getUsername());
+            usuario.setRoles(temp.getRoles());
+        } else {
+            usuario.setPassword(new BCryptPasswordEncoder().encode(usuario.getPassword()));
+        }
+       
         usuarioDao.save(usuario);
         return "redirect:/perfil/mostrar";
     }
