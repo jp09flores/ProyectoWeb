@@ -1,0 +1,266 @@
+create database ProyectoWeb;
+use ProyectoWeb;
+
+drop schema if exists ProyectoWeb;
+drop table if exists categoria;
+drop table if exists bedida;
+drop table if exists producto;
+drop table if exists pedido;
+drop table if exists detalle_pedido;
+drop table if exists usuario;
+drop table if exists rol;
+drop table if exists proyectoweb.factura;
+
+
+create user 'usuario_proyecto'@'%' identified by 'clave_proyecto';
+
+grant all privileges on ProyectoWeb.* to 'usuario_proyecto'@'%';
+flush privileges;
+
+
+/*Se crea la tabla de categoria*/
+create table ProyectoWeb.categoria (
+  id_categoria int not null auto_increment,
+  nombre_categoria varchar (100) not null,
+  activo bool not null,
+  PRIMARY KEY (id_categoria))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+/*Se crea la tabla de productos*/
+create table ProyectoWeb.producto (
+  id_producto int not null auto_increment,
+  id_categoria int not null,
+  nombre_producto varchar (100) not null,
+  precio double not null,
+  ruta_imagen varchar(1024),
+  estado bool not null,
+  PRIMARY KEY (id_producto),
+  FOREIGN KEY (id_categoria) REFERENCES categoria (id_categoria))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+/*Se crea la tabla de pedidos*/
+create table ProyectoWeb.pedido (
+  id_pedido int not null auto_increment,
+  fecha_emision date not null,
+  total double not null,
+  estado bool not null,
+  PRIMARY KEY (id_pedido))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+/*Se crea la tabla de detalle de pedidos*/
+create table ProyectoWeb.detalle_pedido (
+cont int not null auto_increment,
+  id_pedido int not null,
+  id_producto int not null,
+  cantidad_producto int not null,
+  comentarios varchar (500),
+  detalle_subtotal double,
+  estado boolean not null,
+    PRIMARY KEY (cont),
+    FOREIGN KEY (id_pedido) REFERENCES pedido (id_pedido),
+  FOREIGN KEY (id_producto) REFERENCES producto (id_producto))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+/*Se crea la tabla de usuarios*/
+create table ProyectoWeb.usuario (
+	id_usuario int not null auto_increment,
+    username varchar (50) not null,
+    password varchar(200) not null,
+	nombre_usuario varchar (10) not null,
+    primer_apellido varchar (15) not null,
+    segundo_apellido varchar (15) not null,
+    correo varchar (25) null,
+    telefono varchar (15) null,
+    ruta_imagen varchar (1024),
+    activo boolean,
+    PRIMARY KEY (id_usuario))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+/*Se crea la tabla de roles para el usuario*/
+create table ProyectoWeb.rol (
+	id_rol int not null auto_increment,
+    nombre_rol varchar (50) not null,
+    id_usuario int,
+	PRIMARY KEY (id_rol),
+    foreign key id_usuario (id_usuario) references usuario(id_usuario))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+/*se crea la tabla de comentarios*/
+create table ProyectoWeb.comentarios(
+id_comentario int not null auto_increment,
+fecha_emision date not null,
+detalle_comentario varchar(100)not null,
+Valoracion int not null,
+estado Boolean  not null,
+PRIMARY KEY (id_comentario))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+create table ProyectoWeb.factura(
+ id_factura int not null auto_increment,
+ id_pedido int not null,
+ tipo_tarjeta varchar(50) not null,
+ num_tarjeta int not null,
+ nombre_tarjeta varchar(100) not null,
+ fecha date not null,
+ total int not null,
+ id_usuario int not null,
+ estado boolean not null,
+ 
+ foreign key (id_usuario) references usuario(id_usuario),
+ FOREIGN KEY (id_pedido) REFERENCES pedido (id_pedido),
+ PRIMARY KEY (id_factura)
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+create table ProyectoWeb.formulario(
+ id_formulario int not null auto_increment,
+ nombre varchar(50) not null,
+ apellidos varchar(100) not null,
+ correo varchar(50) not null,
+ telefono int not null,
+ PRIMARY KEY (id_formulario)
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+
+INSERT INTO ProyectoWeb.comentarios(id_comentario,fecha_emision,detalle_comentario,Valoracion,estado)values
+(19,'2023-07-21','El mejor restaurante de la zona',5,1),
+(2,'2023-07-21','No tiene variedad',5,1),
+(4,'2023-07-21','Precio muy buenos',4,1),
+(10, '2023-07-27', 'Entrega rápida y eficiente', 3, 3),
+(11, '2023-07-28', 'Producto de alta calidad', 4, 2),
+(12, '2023-07-29', 'No lo recomiendo, tuve problemas con el pedido', 4, 4),
+(13, '2023-07-30', 'Buen servicio al cliente', 5, 5),
+(5, '2023-07-22', 'Excelente servicio', 5, 2),
+(6, '2023-07-23', 'Me gustó mucho el producto', 5, 3),
+(7, '2023-07-24', 'Necesita mejorar la atención al cliente', 5, 1),
+(8, '2023-07-25', 'Recomiendo este producto', 5, 4),
+(9, '2023-07-26', 'No cumplió mis expectativas', 2, 5);
+
+/*-----------------------------------------------------------------------------------------------------------*/
+/*INSERTS DE CATEGORIA*/
+insert into proyectoweb.categoria(nombre_categoria , activo )values
+('Pollo Frito',true),
+('Hamburgesas',true),
+('Alitas',true),
+('Combitos',true),
+('Combos',true),
+('Otros',true),
+('Calzones',true),
+('Lasagnas',true),
+('Espaguettis',true),
+('Bedidas',true);
+
+
+/*INSERTS DE PRODUCTOS*/
+insert into proyectoweb.producto(id_categoria,nombre_producto,precio,ruta_imagen,estado)values
+(1,'Pechuga y ala',1800,'https://www.comedera.com/wp-content/uploads/2013/07/alitas-de-pollo-al-horno.jpg',true),
+(1,'Cuarto y muslo',1600,'https://img.freepik.com/foto-gratis/pollo-frito-variedad-salsas-papas-fritas_23-2148646570.jpg',true),
+(1,'10 piezas de pollo',7000,'https://i.pinimg.com/originals/1b/49/99/1b4999e5eea7424b7041643c5cfd136b.jpg',true),
+(1,'Pechuga',1400,'https://comerbeber.com/archivos/imagen/2021/05/pechugas-pollo-fritas-horno-cv_960.jpg',true),
+(1,'Ala',700,'https://img.freepik.com/fotos-premium/alitas-pollo-fritas-glaseadas-salsa-miel_127425-788.jpg',true),
+(1,'Cuarto',950,'https://w7.pngwing.com/pngs/491/159/png-transparent-four-fried-chickens-crispy-fried-chicken-kfc-chicken-fingers-chicken-nugget-chicken-food-animals-recipe.png',true),
+(1,'Muslo',950,'https://img.freepik.com/foto-gratis/muslos-pollo-frito-primer-plano_23-2148682835.jpg',true),
+(2,'Sencilla',1150,'https://img.freepik.com/fotos-premium/sandwich-hamburguesa-grande-jamon-ahumado-queso-huevos-salchicha-tocino-lechuga-tomate-plato-verde-comida-rapida_491130-3618.jpg',true),
+(2,'Con Queso',1550,'https://img.freepik.com/foto-gratis/hamburguesa-grande-sabrosa_144627-16483.jpg',true),
+(2,'Queso y jamon',1650,'https://img.freepik.com/foto-gratis/deliciosa-hamburguesa-queso_1232-503.jpg',true),
+(2,'Queso, jamon y tocineta',1850,'https://img.freepik.com/fotos-premium/sandwich-hamburguesa-grande-jamon-ahumado-queso-huevos-salchicha-tocino-lechuga-tomate-plato-verde-comida-rapida_491130-3618.jpg',true),
+(2,'Doble',2550,'https://cesavas.com/wp-content/uploads/2018/08/hamburguesa-jamon-serrano-queso.jpg',true),
+(2,'Super',2350,'https://img.freepik.com/foto-gratis/hamburguesa-queso-lechuga-tomates_1232-506.jpg',true),
+(2,'Super Doble',2950,'https://img.freepik.com/foto-gratis/hamburguesa-fresca-ensalada-cebolla_144627-9522.jpg',true),
+(2,'Super Triple',3900,'https://media.gettyimages.com/id/182744943/es/foto/hamburguesa.jpg?s=612x612&w=gi&k=20&c=PbRuyN6wKShnmd1A4A2faDe7WN0HaQKhrE7JQ7T0i5I=',true),
+(2,'Pollo con queso',2300,'https://www.antojoentucocina.com/wp-content/uploads/2021/03/hamburguesa-pollo-frito-4-scaled.jpg',true),
+(3,'Sencillas',3300,'https://img.freepik.com/foto-gratis/pollo-frito-crujiente-plato-ensalada-zanahoria_1150-20212.jpg?w=996&t=st=1688677678~exp=1688678278~hmac=570151e47e653b579b85fc50d8a5ce8fe6db5a8043ce66eceb22e9e4b402076c',true),
+(3,'Salsa BBQ',3700,'https://img.freepik.com/foto-gratis/pollo-frito-variedad-salsas-papas-fritas_23-2148646570.jpg?w=826&t=st=1688677677~exp=1688678277~hmac=103f3af623756be7cf453e2d07b0ca3d5125e5c6571d06e37f85c6d9ac7e1b68',true),
+(3,'Salsa Bufalo',3700,'https://img.freepik.com/foto-gratis/alitas-pollo-al-horno-al-estilo-asiatico_2829-10159.jpg?w=996&t=st=1688677676~exp=1688678276~hmac=b6918a6cb74a9d15fa6eb5959c59a6c83d69edc667ffbd0385832a894fa334a1',true),
+(3,'Salsa mostaza miel',3700,'https://img.freepik.com/foto-gratis/alitas-pollo-bufalo-parrilla-plato-madera-rustica-generado-ia_188544-26049.jpg?w=1060&t=st=1688677740~exp=1688678340~hmac=1cc005a5a2d0aa54fecb70ca8897ab118e5ae74197bdcb2693f7010b2aa2b82e',true),
+(3,'Pimienta Limon',3700,'https://img.freepik.com/foto-gratis/pollo-frito-crujiente-plato-ensalada-zanahoria_1150-20212.jpg?w=996&t=st=1688677678~exp=1688678278~hmac=570151e47e653b579b85fc50d8a5ce8fe6db5a8043ce66eceb22e9e4b402076c',true),
+(3,'Hot BBQ(Bufalo + BBQ)',3700,'https://img.freepik.com/foto-gratis/pollo-frito-crujiente-sobre-tabla-cortar-madera_1150-20220.jpg?w=996&t=st=1688677740~exp=1688678340~hmac=2583bef59f213ff8497affd16d2d6812a4306407d73dd32252d667f30cc49b5a',true),
+(4,'Hamburguesa, papas y refresco',2250,'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBWn30prEzXEH7GIY--B4Rp__YFU1k9m3WhagvRuxwpqPZLvBNfqU2oweLgkrs8qdnHyQ&usqp=CAU',true),
+(4,'Taco, papas y refresco',2250,'https://tacobell.cr/Images/Products/111001_133268314363377166.png',true),
+(4,'Perro, papas y refresco',2250,'https://previews.123rf.com/images/grafner/grafner1411/grafner141100078/34013787-men%C3%BA-del-perrito-caliente-con-patatas-fritas-y-refresco-de-cola.jpg',true),
+(4,'2 Hamburgesas sencillas',1550,'https://st3.depositphotos.com/1006753/12801/i/450/depositphotos_128019598-stock-photo-delicious-grilled-burger.jpg',true),
+(4,'2 Hamburgesas queso',1900,'https://st3.depositphotos.com/1006753/12801/i/450/depositphotos_128019598-stock-photo-delicious-grilled-burger.jpg',true),
+(4,'2 Hamburgesas jamon y queso',2300,'https://st3.depositphotos.com/1006753/12801/i/450/depositphotos_128019598-stock-photo-delicious-grilled-burger.jpg',true),
+(4,'2 Hamburgesas jamon, queso y tocineta',2700,'https://st3.depositphotos.com/1006753/12801/i/450/depositphotos_128019598-stock-photo-delicious-grilled-burger.jpg',true),
+(4,'2 tacos',1500,'https://www.comedera.com/wp-content/uploads/2017/09/tacos-dorados.jpg',true),
+(4,'2 perros calientes',1500,'https://st2.depositphotos.com/3957801/6871/i/950/depositphotos_68712635-stock-photo-two-hot-dogs.jpg',true),
+(5,'Pechuga y ala con papas y ensalada',3700,'https://media.istockphoto.com/id/492151255/es/foto/plato-de-pollo-crocante-con-papas-fritas.jpg?s=612x612&w=0&k=20&c=91CtDesNqAGu2h84srd0MAp7qkYMiRyIm6JlpIyjHgs=',true),
+(5,'Cuarto y muslo con papas y ensalada',3550,'https://media.istockphoto.com/id/492151255/es/foto/plato-de-pollo-crocante-con-papas-fritas.jpg?s=612x612&w=0&k=20&c=91CtDesNqAGu2h84srd0MAp7qkYMiRyIm6JlpIyjHgs=',true),
+(5,'Pechuga deshuesada con paps y ensalada',3650,'https://media.istockphoto.com/id/492151255/es/foto/plato-de-pollo-crocante-con-papas-fritas.jpg?s=612x612&w=0&k=20&c=91CtDesNqAGu2h84srd0MAp7qkYMiRyIm6JlpIyjHgs=',true),
+(5,'Filete de pescado con papas y ensalada',3800,'https://media.istockphoto.com/id/492151255/es/foto/plato-de-pollo-crocante-con-papas-fritas.jpg?s=612x612&w=0&k=20&c=91CtDesNqAGu2h84srd0MAp7qkYMiRyIm6JlpIyjHgs=',true),
+(5,'Costilla asada con papas y ensalada',3900,'https://img.freepik.com/fotos-premium/costillas-cerdo-asadas-servidas-ensalada-papas-fritas_62193-1104.jpg',true),
+(5,'Fajitas de pollo con papas y ensalada',3900,'https://hhmag.com/wp-content/uploads/2015/07/PLATO3_F.jpg',true),
+(5,'Quesadilla de pollo con papas y ensalada',3600,'https://c8.alamy.com/compes/wcpc7j/quesadilla-con-papas-fritas-wcpc7j.jpg',true),
+(5,'Crunchy wrap de pollo con papas y ensalada',3600,'https://res.cloudinary.com/dwb6ecajn/image/upload/c_scale,w_1000/v1600063459/cocinaQ/Crunchy%20wrap%20casero/Crunchy-main_kdorwc.jpg',true),
+(6,'Papas Fritas pequeñas',1200,'https://us.123rf.com/450wm/tobi/tobi1505/tobi150500066/39664585-porci%C3%B3n-de-papas-fritas-en-un-plato.jpg',true),
+(6,'Papas Fritas Medianas',1500,'https://us.123rf.com/450wm/tobi/tobi1505/tobi150500066/39664585-porci%C3%B3n-de-papas-fritas-en-un-plato.jpg',true),
+(6,'Papas Fritas Grandes',2000,'https://us.123rf.com/450wm/tobi/tobi1505/tobi150500066/39664585-porci%C3%B3n-de-papas-fritas-en-un-plato.jpg',true),
+(6,'Papas Fritas Grandes',2600,'https://us.123rf.com/450wm/tobi/tobi1505/tobi150500066/39664585-porci%C3%B3n-de-papas-fritas-en-un-plato.jpg',true),
+(6,'Papas arregladas',4000,'https://www.cocinacaserayfacil.net/wp-content/uploads/2018/02/patatas-bravas-receta.jpg',true),
+(6,'Salchipapas',2500,'https://img.freepik.com/fotos-premium/salchipapa-tipica-america-latina-salchichas-papas-fritas-salsa-tomate-mostaza-mayonesa_123827-3622.jpg',true),
+(6,'Papanachos',4000,'https://assets.unileversolutions.com/recipes-v2/232017.jpg',true),
+(6,'Nuggets con papas',3800,'https://previews.123rf.com/images/serezniy/serezniy1304/serezniy130404766/19099587-nuggets-de-pollo-frito-con-papas-fritas-franc%C3%A9s-y-salsa-de-aislados-en-blanco.jpg',true),
+(6,'Doraditas',1700,'https://img.freepik.com/fotos-premium/nachos-chips-tazon-salsas-imagen-generada-ia_587448-1688.jpg?w=2000',true),
+(6,'Nachos',4000,'https://media.istockphoto.com/id/474048190/es/foto/nachos-supreme.jpg?s=612x612&w=0&k=20&c=o3ESoVPy1tIlPkdevykr5KHuwN0WC2yod2WqrQnubrw=',true),
+(6,'Patacones',3100,'https://media.istockphoto.com/id/471206246/es/foto/tostones-frito-verde-pl%C3%A1tanos-banana-chips.jpg?s=612x612&w=0&k=20&c=gybftsVMyrgdCRiKmq9YKm_Y_Tg2IrAICQX_TPBWqEc=',true),
+(6,'Aros de cebolla',1900,'https://mylatinatable.com/wp-content/uploads/2016/01/foto-heroe-1024x693.jpg',true),
+(7,'Jamon y Queso',3500,'https://dinnersdishesanddesserts.com/wp-content/uploads/2019/11/Calzones-2.jpg',true),
+(7,'Jamon y hongos',3500,'https://t3.ftcdn.net/jpg/04/80/82/92/360_F_480829240_keJGiI8NeBZ03Uqz1HHK4vwccbto0ByN.jpg',true),
+(7,'Pepperoni y Queso',3500,'https://assets.unileversolutions.com/recipes-v2/37982.jpg',true),
+(7,'Pepperoni y hongos',3500,'https://media.istockphoto.com/id/1190420565/es/foto/pizza-calzone-con-pollo-y-queso.jpg?s=612x612&w=0&k=20&c=M6Ln5TRqPG006D0gQwswiVNn1j-eq8YhylajWVYlV0w=',true),
+(8,'Lasagna de carne',5400,'https://upload.wikimedia.org/wikipedia/commons/a/ae/Lasagna.jpg',true),
+(8,'Lasagna de pollo',5400,'https://assets.unileversolutions.com/recipes-v2/232562.jpg',true),
+(9,'Supremos',4000,'https://cdn0.recetasgratis.net/es/posts/2/4/1/spaghetti_con_pollo_7142_orig.jpg',true),
+(9,'A la bolognesa',4000,'https://www.laespanolaaceites.com/wp-content/uploads/2019/05/espaguetis-a-la-bolonesa-1080x671.jpg',true),
+(9,'Pollo y Hongos',4000,'https://www.coosur.com/uploads/recetasaceiteoliva/tagliatelle-salsa-alfredo-con-pollo-y-champinones.jpg',true),
+(10,'Coca Cola',1500,'https://upload.wikimedia.org/wikipedia/commons/c/cc/Coca-Cola_Local_Brand_Cambodia.jpg',true),
+(10,'Fanta',1500,'https://upload.wikimedia.org/wikipedia/commons/3/3e/Fanta_logo_%282009%29.jpg',true),
+(10,'Canada Dry',1500,'https://1000marcas.net/wp-content/uploads/2021/04/Canada-Dry-Logo.jpg',true),
+(10,'Fuze tea',1500,'https://deventosreport.files.wordpress.com/2013/11/logo-fuze-0512-page-001.jpg',true),
+(10,'Agua',1500,'https://www.aguaalpina.com/images/agua-alpina.png',true);
+
+/*INSERTS DE USUARIOS*/
+insert into ProyectoWeb.usuario(id_usuario, username, password, nombre_usuario, primer_apellido, segundo_apellido, correo, telefono, ruta_imagen, activo) values
+('1', 'LuisDa430','$2a$10$P1.w58XvnaYQUQgZUCk4aO/RTRl8EValluCqB3S2VMLTbRt.tlre.','Luis','Núñez','Chacón','luis@gmail.com','7894-8596','https://img.freepik.com/free-icon/user_318-804790.jpg?w=2000',true),
+('2', 'Peloon','$2a$10$P1.w58XvnaYQUQgZUCk4aO/RTRl8EValluCqB3S2VMLTbRt.tlre.','Jose','Flores','Munoz','jose@gmail.com','4567-8475','https://img.freepik.com/free-icon/user_318-804790.jpg?w=2000',true),
+('3', 'Chuzo','$2a$10$P1.w58XvnaYQUQgZUCk4aO/RTRl8EValluCqB3S2VMLTbRt.tlre.','Erick','Rivera','Prado','erick@gmail.com','7894-6845','https://img.freepik.com/free-icon/user_318-804790.jpg?w=2000',true);
+
+insert into ProyectoWeb.rol (id_rol, nombre_rol, id_usuario) values
+ (1,'ROLE_ADMIN',1),
+ (2,'ROLE_USER',1),
+ (3,'ROLE_ADMIN',2),
+ (4,'ROLE_USER',2),
+ (5,'ROLE_USER',3);
+ 
+
+
+select * from ProyectoWeb.categoria;
+select * from proyectoweb.producto;
+select * from proyectoweb.pedido;
+select * from proyectoweb.detalle_pedido;
+select * from proyectoweb.usuario;
+select * from proyectoweb.rol;
+select * from proyectoweb.factura;
+select * from proyectoweb.formulario;
+
+
+
+
+
